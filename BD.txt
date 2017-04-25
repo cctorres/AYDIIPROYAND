@@ -3,6 +3,11 @@ Database name: sql10170497
 Database user: sql10170497
 Database password: FYvYCmgR1a
 Port number: 3306
-Server: http://ameboid-grasses.000webhostapp.com
 
-files.000webhost.com
+
+Pagina
+http://ameboid-grasses.000webhostapp.com
+
+server: files.000webhost.com
+username: ameboid-grasses
+pass FYvYCmgR1a
