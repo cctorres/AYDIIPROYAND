@@ -1,19 +1,16 @@
 <?php
 /**
- * Actualiza un empleado especificado por su identificador
+ * Actualiza una mesa especificado por su identificador
  */
-require 'Empleado.php';
+require 'Mesa.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Decodificando formato Json
     $body = json_decode(file_get_contents("php://input"), true);
-    // Actualizar empleado
-    $retorno = Empleado::update(
-        $body['cod_empleado'],
-		$body['id_empleado'],
-        $body['nombre_empleado'],
-		$body['cargo_empleado'],
-		$body['telefono_empleado'],
-        $body['contraseña_empleado']);
+    // Actualizar mesa
+    $retorno = Mesa::update(
+        $body['id_mesa'],
+		$body['estado_mesa'],
+        $body['id_pedido_mesa']);
     if ($retorno) {
         $json_string = json_encode(array("estado" => 1,"mensaje" => "Actualización correcta"));
 		echo $json_string;

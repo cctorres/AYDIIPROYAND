@@ -1,13 +1,13 @@
 <?php
 /**
- * Elimina un alumno de la base de datos
+ * Elimina una mesa de la base de datos
  * distinguido por su identificador
  */
-require 'Empleado.php';
+require 'Mesa.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Decodificando formato Json
     $body = json_decode(file_get_contents("php://input"), true);
-    $retorno = Empleado::delete($body['cod_empleado']);
+    $retorno = Mesa::delete($body['id_mesa']);
 	//$json_string = json_encode($clientes);
 	//echo 'antes de entrar';
     if ($retorno) {

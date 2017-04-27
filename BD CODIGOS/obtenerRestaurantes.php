@@ -1,14 +1,14 @@
 <?php
 /**
- * Obtiene todas las empleados de la base de datos
+ * Obtiene todas las restaurantes de la base de datos
  */
-require 'Empleado.php';
+require 'Restaurante.php';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Manejar petición GET
-    $empleados = Empleado::getAll();
-    if ($empleados) {
+    $Restaurante = Restaurante::getAll();
+    if ($Restaurante) {
         $datos["estado"] = 1;
-        $datos["empleados"] = $empleados;
+        $datos["Restaurante"] = $Restaurante;
         print json_encode($datos);
     } else {
         print json_encode(array(
