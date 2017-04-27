@@ -1,14 +1,14 @@
 <?php
 /**
- * Obtiene todas las empleados de la base de datos
+ * Obtiene todas las mesas de la base de datos
  */
-require 'Empleado.php';
+require 'Mesa.php';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Manejar petición GET
-    $empleados = Empleado::getAll();
-    if ($empleados) {
+    $mesas = Mesa::getAll();
+    if ($mesas) {
         $datos["estado"] = 1;
-        $datos["empleados"] = $empleados;
+        $datos["mesas"] = $mesas;
         print json_encode($datos);
     } else {
         print json_encode(array(

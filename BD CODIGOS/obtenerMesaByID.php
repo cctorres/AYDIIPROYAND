@@ -1,20 +1,20 @@
 <?php
 /**
- * Obtiene el detalle de un empleado especificado por
- * su identificador "cod_empleado"
+ * Obtiene el detalle de una mesaespecificado por
+ * su identificador "id_mesa"
  */
-require 'Empleado.php';
+require 'Mesa.php';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['cod_empleado'])) {
-        // Obtener parámetro codEmpleado
-        $parametro = $_GET['cod_empleado'];
+    if (isset($_GET['id_mesa'])) {
+        // Obtener parámetro id_mesa
+        $parametro = $_GET['id_mesa'];
         // Tratar retorno
-        $retorno = Empleado::getById($parametro);
+        $retorno = Mesa::getById($parametro);
         if ($retorno) {
-            $empleado["estado"] = 1;		// cambio "1" a 1 porque no coge bien la cadena.
-            $empleado["empleado"] = $retorno;
-            // Enviar objeto json del empleado
-            print json_encode($empleado);
+            $mesa["estado"] = 1;		// cambio "1" a 1 porque no coge bien la cadena.
+            $mesa["mesa"] = $retorno;
+            // Enviar objeto json de la mesa
+            print json_encode($mesa);
         } else {
             // Enviar respuesta de error general
             print json_encode(

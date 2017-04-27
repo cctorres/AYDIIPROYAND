@@ -1,18 +1,15 @@
 <?php
 /**
- * Insertar un nuevo empleado en la base de datos
+ * Insertar una nueva mesa en la base de datos
  */
-require 'Empleado.php';
+require 'Mesa.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Decodificando formato Json
     $body = json_decode(file_get_contents("php://input"), true);
-    // Insertar empleado
-    $retorno = Empleado::insert(
-        $body['id_empleado'],
-        $body['nombre_empleado'],
-		$body['cargo_empleado'],
-		$body['telefono_empleado'],
-        $body['contraseña_empleado']);
+    // Insertar mesa
+    $retorno = Mesa::insert(
+        $body['estado_mesa'],
+        $body['id_pedido_mesa']);
     if ($retorno) {
         $json_string = json_encode(array("estado" => 1,"mensaje" => "Creación correcta"));
 		echo $json_string;
