@@ -37,13 +37,7 @@ class Empleado
     public static function getById($cod_empleado)
     {
         // Consulta de la tabla Empleado
-        $consulta = "SELECT cod_empleado,
-                            id_empleado,
-                            nombre_empleado,
-							cargo_empleado,
-							telefono_empleado,
-							contraseña_empleado,
-							id_restaurante_empleado,
+        $consulta = "SELECT *
                              FROM Empleado
                              WHERE cod_empleado = ?";
         try {

@@ -18,9 +18,14 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -44,7 +49,7 @@ public class PruebaWeb extends AppCompatActivity implements View.OnClickListener
     String obtenerEmpleados = URLD + "/obtenerEmpleados.php";
     String obtenerEmpleadoID = URLD + "/obtenerEmpleadoByID.php";
     String insertarEmpleado = URLD + "/insertarEmpleado.php";
-    String borrarEmpleado = URLD + "/borrarEmpleado.php";
+    String borrarEmpleado = URLD + "/borrarMesa.php";
     String actualizarEmpleado = URLD + "actualizarEmpleado.php";
 
     @Override
@@ -76,6 +81,7 @@ public class PruebaWeb extends AppCompatActivity implements View.OnClickListener
         // listener
         mostrar.setOnClickListener(this);
         agregar.setOnClickListener(this);
+        borrar.setOnClickListener(this);
     }
 
     @Override
@@ -109,11 +115,11 @@ public class PruebaWeb extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.borrar:
                 hiloconexion = new ObtenerWebService();
-                hiloconexion.execute(borrarEmpleado,"2");//borrar empleados
+                hiloconexion.execute(borrarEmpleado,"2",id.getText().toString());//borrar empleados
                 break;
             case R.id.mostrar:
-                hiloconexion = new ObtenerWebService();
-                hiloconexion.execute(obtenerEmpleados,"3");//Obtener empleados
+                //hiloconexion = new ObtenerWebService();
+                //hiloconexion.execute(obtenerEmpleados,"3");//Obtener empleados
                 break;
             default:
 
@@ -159,7 +165,70 @@ public class PruebaWeb extends AppCompatActivity implements View.OnClickListener
 
 
             }
-            else if (params[1]=="2"){//borrar
+            else if (params[1]=="2"){    // delete
+
+                try {
+                    HttpURLConnection urlConn;
+
+                    DataOutputStream printout;
+                    DataInputStream input;
+                    url = new URL(cadena);
+                    urlConn = (HttpURLConnection) url.openConnection();
+                    urlConn.setDoInput(true);
+                    urlConn.setDoOutput(true);
+                    urlConn.setUseCaches(false);
+                    urlConn.setRequestProperty("Content-Type", "application/json");
+                    urlConn.setRequestProperty("Accept", "application/json");
+                    urlConn.connect();
+                    //Creo el Objeto JSON
+                    JSONObject jsonParam = new JSONObject();
+                    jsonParam.put("id_mesa", params[2]);
+                    // Envio los parámetros post.
+                    OutputStream os = urlConn.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(
+                            new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(jsonParam.toString());
+                    writer.flush();
+                    writer.close();
+
+                    int respuesta = urlConn.getResponseCode();
+
+
+                    StringBuilder result = new StringBuilder();
+
+                    if (respuesta == HttpURLConnection.HTTP_OK) {
+
+                        String line;
+                        BufferedReader br=new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+                        while ((line=br.readLine()) != null) {
+                            result.append(line);
+                            //response+=line;
+                        }
+
+                        //Creamos un objeto JSONObject para poder acceder a los atributos (campos) del objeto.
+                        JSONObject respuestaJSON = new JSONObject(result.toString());   //Creo un JSONObject a partir del StringBuilder pasado a cadena
+                        //Accedemos al vector de resultados
+
+                        String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
+
+                        if (resultJSON == "1") {      // hay un alumno que mostrar
+                            devuelve = "Alumno borrado correctamente";
+
+                        } else if (resultJSON == "2") {
+                            devuelve = "No hay alumnos";
+                        }
+
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return devuelve;
 
             }
             else if (params[1].equalsIgnoreCase("3")){//mostrar
