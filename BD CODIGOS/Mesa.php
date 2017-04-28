@@ -34,12 +34,10 @@ class Mesa
      * @param $id_mesa	 Identificador de la mesa
      * @return mixed
      */
-    public static function getById($id_mesa	)
+    public static function getById($id_mesa)
     {
         // Consulta de la tabla Mesa
-        $consulta = "SELECT id_mesa,
-                            estado_mesa,
-							id_pedido_mesa,
+        $consulta = "SELECT *
                              FROM Mesa
                              WHERE id_mesa = ?";
         try {
@@ -110,7 +108,7 @@ class Mesa
     /**
      * Eliminar el registro con el identificador especificado
      *
-     * @param $id_Mesa identificador de la tabla Mesa
+     * @param $id_mesa identificador de la tabla Mesa
      * @return bool Respuesta de la eliminación
      */
     public static function delete($id_mesa)

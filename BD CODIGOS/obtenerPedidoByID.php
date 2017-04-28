@@ -1,20 +1,20 @@
 <?php
 /**
- * Obtiene el detalle de una mesaespecificado por
- * su identificador "id_mesa"
+ * Obtiene el detalle de un pedido especificado por
+ * su identificador "id_pedido"
  */
-require 'Mesa.php';
+require 'Pedido.php';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['id_mesa'])) {
-        // Obtener parámetro id_mesa
-        $parametro = $_GET['id_mesa'];
+    if (isset($_GET['id_pedido'])) {
+        // Obtener parámetro id_pedido
+        $parametro = $_GET['id_pedido'];
         // Tratar retorno
-        $retorno = Mesa::getById($parametro);
+        $retorno = Pedido::getById($parametro);
         if ($retorno) {
-            $mesas["estado"] = 1;		// cambio "1" a 1 porque no coge bien la cadena.
-            $mesas["mesas"] = $retorno;
-            // Enviar objeto json de la mesa
-            print json_encode($mesas);
+            $Pedido["estado"] = 1;		// cambio "1" a 1 porque no coge bien la cadena.
+            $Pedido["pedido"] = $retorno;
+            // Enviar objeto json del pedido
+            print json_encode($Pedido);
         } else {
             // Enviar respuesta de error general
             print json_encode(
