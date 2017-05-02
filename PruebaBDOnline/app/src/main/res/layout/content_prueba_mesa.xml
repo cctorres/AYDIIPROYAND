@@ -6,49 +6,41 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.computador.pruebabdonline.PruebaWeb"
-    tools:showIn="@layout/activity_prueba_web">
+    tools:context="com.example.computador.pruebabdonline.Vista.PruebaMesa"
+    tools:showIn="@layout/activity_prueba_mesa">
 
 
-    <TextView
-        android:id="@+id/nombre"
+    <EditText
+        android:id="@+id/identificador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Nombre" />
+        android:text="Identificador" />
 
-    <TextView
-        android:id="@+id/apellido"
+    <EditText
+        android:id="@+id/estado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Apellido" />
+        android:text="Estado" />
 
-    <TextView
-        android:id="@+id/codigo"
+    <EditText
+        android:id="@+id/pedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Codigo" />
+        android:text="IdPedidoMesa" />
 
-    <TextView
-        android:id="@+id/identificacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Identificacion" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -56,19 +48,36 @@
             android:id="@+id/agregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="agregar" />
 
         <Button
             android:id="@+id/borrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="borrar" />
 
         <Button
             android:id="@+id/mostrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="mostrar" />
+
+        <Button
+            android:id="@+id/ide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ID" />
+
+        <Button
+            android:id="@+id/actualizar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Actualizar" />
     </LinearLayout>
 
     <TextView

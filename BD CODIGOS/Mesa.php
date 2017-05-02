@@ -71,7 +71,7 @@ class Mesa
     {
         // Creando consulta UPDATE
         $consulta = "UPDATE Mesa" .
-            " SET estado_mesa?, id_pedido_mesa? " .
+            " SET estado_mesa=?, id_pedido_mesa=? " .
             "WHERE id_mesa=?";
         // Preparar la sentencia
         $cmd = Database::getInstance()->getDb()->prepare($consulta);
@@ -94,7 +94,7 @@ class Mesa
         // Sentencia INSERT
         $comando = "INSERT INTO Mesa ( " .
             " estado_mesa," .
-            " id_pedido_mesa," .
+            " id_pedido_mesa)" .
             " VALUES( ?,?)";
         // Preparar la sentencia
         $sentencia = Database::getInstance()->getDb()->prepare($comando);
