@@ -1,6 +1,5 @@
 package com.example.computador.pruebabdonline.Vista;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,26 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.computador.pruebabdonline.Controlador.AsyncResponse;
-import com.example.computador.pruebabdonline.Controlador.ObtenerServiciosWeb;
+import com.example.computador.pruebabdonline.Controlador.ObtenerServiciosWebSingleton;
 import com.example.computador.pruebabdonline.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class PruebaMesa extends AppCompatActivity implements View.OnClickListener, AsyncResponse {
 
@@ -48,7 +29,7 @@ public class PruebaMesa extends AppCompatActivity implements View.OnClickListene
     Button IDe;
     Button actualizar;
 
-    ObtenerServiciosWeb hiloconexion;
+    ObtenerServiciosWebSingleton hiloconexion;
 
     //URL del servidor
     String URLD = "http://ameboid-grasses.000webhostapp.com";
@@ -124,13 +105,13 @@ public class PruebaMesa extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()){
             case R.id.mostrar:
 
-                hiloconexion = new ObtenerServiciosWeb(this);
-                hiloconexion.execute(GET,"1");   // Parámetros que recibe doInBackground
+                hiloconexion = new ObtenerServiciosWebSingleton(this);
+                hiloconexion.execute(GET,"obtenerMesas");   // Parámetros que recibe doInBackground
 
                 break;
             case R.id.ide:
 
-                hiloconexion = new ObtenerServiciosWeb(this);
+                hiloconexion = new ObtenerServiciosWebSingleton(this);
                 String cadenallamada = GETID + "?id_mesa=" + identificador.getText().toString();
                 hiloconexion.execute(cadenallamada,"2");   // Parámetros que recibe doInBackground
 
@@ -138,21 +119,21 @@ public class PruebaMesa extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.agregar:
 
-                hiloconexion = new ObtenerServiciosWeb(this);
-                hiloconexion.execute(INSERT,"3",estado.getText().toString(),pedido.getText().toString());   // Parámetros que recibe doInBackground
+                hiloconexion = new ObtenerServiciosWebSingleton(this);
+                hiloconexion.execute(INSERT,"insertarMesa",estado.getText().toString(),pedido.getText().toString());   // Parámetros que recibe doInBackground
 
 
                 break;
             case R.id.actualizar:
 
-                hiloconexion = new ObtenerServiciosWeb(this);
+                hiloconexion = new ObtenerServiciosWebSingleton(this);
                 hiloconexion.execute(UPDATE,"4",identificador.getText().toString(),estado.getText().toString(),pedido.getText().toString());   // Parámetros que recibe doInBackground
 
 
                 break;
             case R.id.borrar:
 
-                hiloconexion = new ObtenerServiciosWeb(this);
+                hiloconexion = new ObtenerServiciosWebSingleton(this);
                 hiloconexion.execute(ERASE,"5",identificador.getText().toString());   // Parámetros que recibe doInBackground
 
 
