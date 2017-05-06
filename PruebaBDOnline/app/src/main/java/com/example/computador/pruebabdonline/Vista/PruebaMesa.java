@@ -31,14 +31,6 @@ public class PruebaMesa extends AppCompatActivity implements View.OnClickListene
 
     ObtenerServiciosWebSingleton hiloconexion;
 
-    //URL del servidor
-    String URLD = "http://ameboid-grasses.000webhostapp.com";
-    //rutas de los Web Services
-    String GET = URLD + "/obtenerMesas.php";
-    String GETID = URLD + "/obtenerMesaByID.php";
-    String INSERT = URLD + "/insertarMesa.php";
-    String ERASE = URLD + "/borrarMesa.php";
-    String UPDATE = URLD + "/actualizarMesa.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,35 +98,32 @@ public class PruebaMesa extends AppCompatActivity implements View.OnClickListene
             case R.id.mostrar:
 
                 hiloconexion = new ObtenerServiciosWebSingleton(this);
-                hiloconexion.execute(GET,"obtenerMesas");   // Parámetros que recibe doInBackground
+                hiloconexion.execute("obtenerMesas");   // Parámetros que recibe doInBackground
 
                 break;
             case R.id.ide:
 
                 hiloconexion = new ObtenerServiciosWebSingleton(this);
-                String cadenallamada = GETID + "?id_mesa=" + identificador.getText().toString();
-                hiloconexion.execute(cadenallamada,"2");   // Parámetros que recibe doInBackground
+                hiloconexion.execute("obtenerMesaByID", identificador.getText().toString());   // Parámetros que recibe doInBackground
 
 
                 break;
             case R.id.agregar:
 
                 hiloconexion = new ObtenerServiciosWebSingleton(this);
-                hiloconexion.execute(INSERT,"insertarMesa",estado.getText().toString(),pedido.getText().toString());   // Parámetros que recibe doInBackground
+                hiloconexion.execute("insertarMesa",estado.getText().toString(),pedido.getText().toString());   // Parámetros que recibe doInBackground
 
 
                 break;
             case R.id.actualizar:
-
                 hiloconexion = new ObtenerServiciosWebSingleton(this);
-                hiloconexion.execute(UPDATE,"4",identificador.getText().toString(),estado.getText().toString(),pedido.getText().toString());   // Parámetros que recibe doInBackground
+                hiloconexion.execute("actualizarMesa",identificador.getText().toString(),estado.getText().toString(),pedido.getText().toString());   // Parámetros que recibe doInBackground
 
 
                 break;
             case R.id.borrar:
-
                 hiloconexion = new ObtenerServiciosWebSingleton(this);
-                hiloconexion.execute(ERASE,"5",identificador.getText().toString());   // Parámetros que recibe doInBackground
+                hiloconexion.execute("borrarMesa",identificador.getText().toString());   // Parámetros que recibe doInBackground
 
 
                 break;
