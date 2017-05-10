@@ -1,5 +1,8 @@
 package com.example.computador.pruebabdonline.Modelo;
 
+/**
+* Clase que representa el objeto Mesa
+ */
 
 public class Mesa {
 

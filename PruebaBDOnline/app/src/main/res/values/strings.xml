@@ -2,4 +2,17 @@
     <string name="app_name">PruebaBDOnline</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_prueba_mesa">PruebaMesa</string>
+
+    <!--- String de inicio sesion -->
+    <string name="idInicioSesion">Identificación</string>
+    <string name="contraseñaInicioSesion">Contraseña</string>
+    <string name="iniciarSesionInicioSesion">Iniciar sesión</string>
+
+    <!--- String de vista admin -->
+    <string name="btPedidos">Pedidos</string>
+    <string name="btCarta">Carta</string>
+    <string name="btEmpleados">Empleados</string>
+    <string name="btInventario">Inventario</string>
+    <string name="btRestaurante">Restaurante</string>
+
 </resources>

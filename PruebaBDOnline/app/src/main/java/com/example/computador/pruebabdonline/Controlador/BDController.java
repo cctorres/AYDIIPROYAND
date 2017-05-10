@@ -293,9 +293,7 @@ public class BDController {
                 //Accedemos al vector de resultados
                 String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
                 if (resultJSON.equalsIgnoreCase("1")){      // hay un alumno que mostrar
-                    devuelve = devuelve + "("+respuestaJSON.getJSONObject("mesas").getString("id_mesa") + " * " +
-                            respuestaJSON.getJSONObject("mesas").getString("estado_mesa") + " * " +
-                            respuestaJSON.getJSONObject("mesas").getString("id_pedido_mesa")+")";
+                    devuelve = result.toString();
 
                 }
                 else if (resultJSON=="2"){
@@ -1157,11 +1155,7 @@ public class BDController {
                 if (resultJSON.equalsIgnoreCase("1")){      // hay datos
                     JSONArray alumnosJSON = respuestaJSON.getJSONArray("restaurantes");   // estado es el nombre del campo en el JSON
                     for(int i=0;i<alumnosJSON.length();i++){
-                        devuelve = devuelve + "("+alumnosJSON.getJSONObject(i).getString("id_restaurante") + " * " +
-                                alumnosJSON.getJSONObject(i).getString("nombre_restaurante") + " * " +
-                                alumnosJSON.getJSONObject(i).getString("direccion_restaurante") + " * " +
-                                alumnosJSON.getJSONObject(i).getString("num_mesas_restaurante") + " * " +
-                                alumnosJSON.getJSONObject(i).getString("telefono_restaurante") + ")";
+                        devuelve = result.toString();
                     }
                 }
                 else if (resultJSON.equalsIgnoreCase("2")){

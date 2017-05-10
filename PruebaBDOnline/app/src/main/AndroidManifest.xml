@@ -16,13 +16,16 @@
         <activity
             android:name=".Vista.PruebaMesa"
             android:label="@string/title_activity_prueba_mesa"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Vista.inicioSesion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Vista.VistaAdmin" />
+        <activity android:name=".Vista.VistaRestaurante"></activity>
     </application>
 
 </manifest>
