@@ -52,6 +52,10 @@ public class ObtenerServiciosWebSingleton extends AsyncTask<String,Void,String>{
             devuelve = BD.borrarMesa(params[1]);
             return devuelve;
         }
+        else if(params[0].equalsIgnoreCase("obtenerRestaurante")){
+            devuelve = BD.obtenerRestaurantes();
+            return devuelve;
+        }
         return "no entró";
     }
 
