@@ -25,7 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Vista.VistaAdmin" />
-        <activity android:name=".Vista.VistaRestaurante"></activity>
+        <activity android:name=".Vista.VistaRestaurante" />
+        <activity android:name=".Vista.EmpleadosVista"></activity>
     </application>
 
 </manifest>

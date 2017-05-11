@@ -11,3 +11,19 @@ http://ameboid-grasses.000webhostapp.com
 server: files.000webhost.com
 username: ameboid-grasses
 pass FYvYCmgR1a
+
+
+HOSTINGER
+Pagina:
+http://aydandroid.esy.es/
+
+server: ftp.aydandroid.esy.es
+usuario: u547725837
+pass: aydandroidii
+puerto: 21
+
+BASE DE DATOS
+Host: mysql.hostinger.es
+nombre: u547725837_bd
+usuario: u547725837_user
+puerto:  3306

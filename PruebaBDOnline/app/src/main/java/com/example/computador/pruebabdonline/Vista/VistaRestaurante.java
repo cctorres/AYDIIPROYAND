@@ -1,5 +1,7 @@
 package com.example.computador.pruebabdonline.Vista;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,21 +10,33 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.computador.pruebabdonline.Controlador.AsyncResponse;
+import com.example.computador.pruebabdonline.Controlador.DBController;
 import com.example.computador.pruebabdonline.Controlador.JSonAdapter;
 import com.example.computador.pruebabdonline.Controlador.ObtenerServiciosWebSingleton;
+import com.example.computador.pruebabdonline.Controlador.PHPGetter;
+import com.example.computador.pruebabdonline.Controlador.VolleySingleton;
 import com.example.computador.pruebabdonline.Modelo.Restaurante;
 import com.example.computador.pruebabdonline.R;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
-public class VistaRestaurante extends AppCompatActivity implements View.OnClickListener, AsyncResponse {
+import java.util.HashMap;
 
-    TextView tvNombre, tvDireccion, tvNumero, tvTelefono;
-    EditText etNombre, etDireccion, etNumero, etTelefono;
-    Button actualizar;
-    ObtenerServiciosWebSingleton hiloconexion;
-    String JsonString;
+public class VistaRestaurante extends AppCompatActivity implements View.OnClickListener {
+
+    private TextView tvNombre, tvDireccion, tvNumero, tvTelefono;
+    private EditText etNombre, etDireccion, etNumero, etTelefono;
+    private Button actualizar;
+    private ObtenerServiciosWebSingleton hiloconexion;
+    private PHPGetter php = new PHPGetter();
+    private DBController db = new DBController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,43 +60,63 @@ public class VistaRestaurante extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()){
-            case R.id.actualizar:
-
-
-
-               break;
+            case R.id.bt_actualizar_vr:
+                String nombre = etNombre.getText().toString();
+                String direccion = etDireccion.getText().toString();
+                String numero = etNumero.getText().toString();
+                String telefono = etTelefono.getText().toString();
+                db.actualizarRestaurante(nombre,direccion,numero,telefono,this);
+                this.refrescarActiviry();
+                break;
             default:
                 break;
         }
     }
 
-    public void llenarDatosVR(TextView nom, TextView dir, TextView num, TextView tel) throws JSONException {
-        String respuesta;
-        hiloconexion = new ObtenerServiciosWebSingleton(this);
-        hiloconexion.execute("obtenerRestaurante");  // Parámetros que recibe doInBackground
-        JSonAdapter restauranteJSon = new JSonAdapter();
-        Restaurante rest = restauranteJSon.restauranteAdapter(this.JsonString);
-        nom.setText(rest.getNombre());
-        dir.setText(rest.getDireccion());
-        num.setText(Integer.toString(rest.getNumeroMesas()));
-        tel.setText(rest.getTelefono());
-    }
-
-    @Override
-    public void processFinish(String output) {
-        JsonString = output;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        try {
-            llenarDatosVR(tvNombre, tvDireccion, tvNumero, tvTelefono);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        String url = php.getObtenerRestaurantes();
+
+        StringRequest peticion = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String respuesta) {
+                        JSonAdapter json = new JSonAdapter();
+                        Restaurante restaurante = null;
+                        try {
+                            restaurante = json.restauranteAdapter(respuesta);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        tvNombre.setText("Nombre: "+restaurante.getNombre());
+                        tvDireccion.setText("Dirección: "+restaurante.getDireccion());
+                        tvNumero.setText("Mesas: "+Integer.toString(restaurante.getNumeroMesas()));
+                        tvTelefono.setText("Telefono: "+restaurante.getTelefono());
+                        etNombre.setText(restaurante.getNombre());
+                        etDireccion.setText(restaurante.getDireccion());
+                        etNumero.setText(Integer.toString(restaurante.getNumeroMesas()));
+                        etTelefono.setText(restaurante.getTelefono());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        VolleySingleton.getInstance(this).addToRequestQueue(peticion);
+
+    }
+
+    public void refrescarActiviry(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
 }

@@ -9,12 +9,6 @@
     android:background="@color/colorRedDark"
     tools:context="com.example.computador.pruebabdonline.Vista.VistaRestaurante">
 
-    <TextView
-        android:id="@+id/tv_respuesta_vr"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,58 +17,25 @@
         android:padding="10dp"
         android:background="@color/colorRedLight"
         android:layout_margin="10dp"
-        >
+        android:weightSum="1">
 
-        <TextView
-            android:id="@+id/tv_nombre_vr"
+
+        <ListView
+            android:id="@+id/lv_empleados_emv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="15"
-            android:text="Nombre Restaurante: "
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_direccion_vr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ems="15"
-            android:text="Direccion: "
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_numero_vr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ems="15"
-            android:text="Número de mesas: "
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_telefono_vr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ems="15"
-            android:text="Telefono: "
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-
+            android:layout_height="150sp"
+            android:layout_weight="1.92" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content">
+    <LinearLayout
+
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/colorWhite"
         android:padding="10dp"
@@ -87,22 +48,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:inputType="number"
+            android:text="Nro identificacion:"
             android:textColor="@color/colorRedDark"
-            android:textStyle="bold"
             android:textSize="15dp"
-            android:inputType="textPersonName"
-            android:text="Nombre Restaurante"
-            />
+            android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/et_nombrer_vr"
+            android:id="@+id/et_identificacion_emv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:textSize="15dp"
             android:inputType="textPersonName"
-            android:textColor="@color/colorRedDark"
-            android:text="" />
+            android:textColor="@color/colorRedDark" />
 
         <TextView
             android:id="@+id/editText8"
@@ -113,17 +72,16 @@
             android:textColor="@color/colorRedDark"
             android:textStyle="bold"
             android:inputType="textPersonName"
-            android:text="Dirección" />
+            android:text="Nombre:" />
 
         <EditText
-            android:id="@+id/et_direccion_vr"
+            android:id="@+id/et_nombre_emv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:textSize="15dp"
             android:textColor="@color/colorRedDark"
-            android:inputType="textPersonName"
-            android:text="" />
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/editText7"
@@ -134,17 +92,34 @@
             android:textColor="@color/colorRedDark"
             android:textStyle="bold"
             android:inputType="textPersonName"
-            android:text="Número de mesas" />
+            android:text="Cargo:" />
+
+        <Spinner
+            android:id="@+id/sp_cargo_emv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="15dp"/>
+
+        <TextView
+        android:id="@+id/editText70"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="15dp"
+        android:textColor="@color/colorRedDark"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        android:text="Telefono:" />
 
         <EditText
-            android:id="@+id/et_numero_vr"
+            android:id="@+id/et_telefono_emv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:textSize="15dp"
             android:textColor="@color/colorRedDark"
-            android:inputType="phone"
-            android:text="" />
+            android:inputType="phone" />
 
         <TextView
             android:id="@+id/editText6"
@@ -155,23 +130,23 @@
             android:textColor="@color/colorRedDark"
             android:textStyle="bold"
             android:inputType="textPersonName"
-            android:text="Telefono" />
+            android:text="Contraseña:" />
 
         <EditText
-            android:id="@+id/et_telefono_vr"
+            android:id="@+id/et_contraseña_emv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:textSize="15dp"
             android:textColor="@color/colorRedDark"
-            android:inputType="phone"
-            android:text="" />
+            android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/bt_actualizar_vr"
+            android:id="@+id/bt_agregar_emv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textSize="15dp"
-            android:text="Actualizar" />
+            android:text="Agregar" />
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>
