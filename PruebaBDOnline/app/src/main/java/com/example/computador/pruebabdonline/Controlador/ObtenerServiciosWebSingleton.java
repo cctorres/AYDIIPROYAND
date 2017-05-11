@@ -56,6 +56,10 @@ public class ObtenerServiciosWebSingleton extends AsyncTask<String,Void,String>{
             devuelve = BD.obtenerRestaurantes();
             return devuelve;
         }
+        else if(params[0].equalsIgnoreCase("actualizarRestaurante")){
+            devuelve = BD.actualizarRestaurante(params[1],params[2],params[3],params[4],params[5]);
+            return devuelve;
+        }
         return "no entró";
     }
 
@@ -66,7 +70,11 @@ public class ObtenerServiciosWebSingleton extends AsyncTask<String,Void,String>{
 
     @Override
     protected void onPostExecute(String s) {
-        delegate.processFinish(s);
+        try {
+            delegate.processFinish(s);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

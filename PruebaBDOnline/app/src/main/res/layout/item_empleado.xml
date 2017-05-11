@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:textAlignment="gravity"
+    android:background="@color/colorWhite"
+    >
+
+    <TextView
+        android:id="@+id/tv_codigo_iem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:textColor="@color/colorRedDark"/>
+
+    <TextView
+        android:id="@+id/tv_identificador_iem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:textColor="@color/colorRedDark"/>
+
+    <TextView
+        android:id="@+id/tv_nombre_iem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:textColor="@color/colorRedDark"/>
+
+    <TextView
+        android:id="@+id/tv_cargo_iem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:textColor="@color/colorRedDark"/>
+
+    <TextView
+        android:id="@+id/tv_telefono_iem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:textColor="@color/colorRedDark"/>
+</LinearLayout>

@@ -43,18 +43,18 @@ class Restaurante
         $id_restaurante,
         $nombre_restaurante,
         $direccion_restaurante,
-		$num_mesas_restausante,
+		$num_mesas_restaurante,
 		$telefono_restaurante
     )
     {
         // Creando consulta UPDATE
         $consulta = "UPDATE Restaurante" .
-            " SET nombre_restaurante=?, direccion_restaurante=?, num_mesas_restausante=?, telefono_restaurante=? " .
+            " SET nombre_restaurante=?, direccion_restaurante=?, num_mesas_restaurante=?, telefono_restaurante=? " .
             "WHERE id_restaurante=?";
         // Preparar la sentencia
         $cmd = Database::getInstance()->getDb()->prepare($consulta);
         // Relacionar y ejecutar la sentencia
-        $cmd->execute(array($nombre_restaurante, $direccion_restaurante, $num_mesas_restausante, $telefono_restaurante, $id_restaurante));
+        $cmd->execute(array($nombre_restaurante, $direccion_restaurante, $num_mesas_restaurante, $telefono_restaurante, $id_restaurante));
         return $cmd;
     }
     /**

@@ -42,6 +42,14 @@ public class VistaAdmin extends AppCompatActivity implements View.OnClickListene
                 intent = new Intent(VistaAdmin.this, VistaRestaurante.class);
                 startActivity(intent);
                 break;
+            case R.id.bt_pedidos_va:
+                intent = new Intent(VistaAdmin.this, PruebaMesa.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_empleados_va:
+                intent = new Intent(VistaAdmin.this, EmpleadosVista.class);
+                startActivity(intent);
+                break;
             default:
 
                 break;

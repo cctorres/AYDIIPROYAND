@@ -12,8 +12,8 @@ import com.example.computador.pruebabdonline.R;
 public class inicioSesion extends AppCompatActivity implements View.OnClickListener{
 
     //Datos para entrar como superusuario si todavia no hay un administrador en la BD remota
-    String idAdmin = "123456789";
-    String contraseñaAdmin = "123456789";
+    String idAdmin = "";
+    String contraseñaAdmin = "";
 
     //Declaración de variables
     Button iniciarSesion;

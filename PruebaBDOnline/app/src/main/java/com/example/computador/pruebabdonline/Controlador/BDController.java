@@ -22,7 +22,7 @@ import java.net.URL;
 public class BDController {
 
     //URL del servidor
-    String URLD = "http://ameboid-grasses.000webhostapp.com";
+    String URLD = "http://aydandroid.esy.es/";
     //rutas de los Web Services de la Tabla Mesa
     String obtenerMesas = URLD + "/obtenerMesas.php";
     String obtenerMesaByID = URLD + "/obtenerMesaByID.php";
@@ -51,7 +51,7 @@ public class BDController {
     String obtenerRestaurantes = URLD + "/obtenerRestaurantes.php";
     String insertarRestaurante = URLD + "/insertarRestaurante.php";
     String borrarRestaurante = URLD + "/borrarRestaurante.php";
-    String actualizarRestaurante = URLD + "/actualizarPedido.php";
+    String actualizarRestaurante = URLD + "/actualizarRestaurante.php";
 
 
 
@@ -1153,7 +1153,7 @@ public class BDController {
                 //Accedemos al vector de resultados
                 String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
                 if (resultJSON.equalsIgnoreCase("1")){      // hay datos
-                    JSONArray alumnosJSON = respuestaJSON.getJSONArray("restaurantes");   // estado es el nombre del campo en el JSON
+                    JSONArray alumnosJSON = respuestaJSON.getJSONArray("Restaurante");   // estado es el nombre del campo en el JSON
                     for(int i=0;i<alumnosJSON.length();i++){
                         devuelve = result.toString();
                     }
