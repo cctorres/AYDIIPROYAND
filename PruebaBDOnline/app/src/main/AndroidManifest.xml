@@ -26,7 +26,8 @@
         </activity>
         <activity android:name=".Vista.VistaAdmin" />
         <activity android:name=".Vista.VistaRestaurante" />
-        <activity android:name=".Vista.EmpleadosVista"></activity>
+        <activity android:name=".Vista.EmpleadosVista" />
+        <activity android:name=".Vista.EmpleadoDetalle"></activity>
     </application>
 
 </manifest>
