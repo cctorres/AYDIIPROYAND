@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/colorRedDark"
+    android:background="@drawable/fondo"
     tools:context="com.example.computador.pruebabdonline.Vista.VistaRestaurante">
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:background="@color/colorRedLight"
+        android:background="@color/colorBlackLight50"
         android:layout_margin="10dp"
         >
 
@@ -172,6 +172,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
+            android:padding="10dp"
+            android:background="@color/colorRedDark"
+            android:textColor="@color/colorWhite"
             android:text="Actualizar" />
     </LinearLayout>
 </LinearLayout>

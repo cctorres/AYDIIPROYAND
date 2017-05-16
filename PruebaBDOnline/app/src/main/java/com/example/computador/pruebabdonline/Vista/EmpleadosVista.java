@@ -46,7 +46,7 @@ public class EmpleadosVista extends AppCompatActivity implements View.OnClickLis
     private Spinner cargo;
     private Button agregar;
     private ListView lista;
-    private String[] datos = new String[] {"Administrador", "Cocinero", "Mesero", "Repartidor", "Supervisor"};
+    private String[] cargos = new String[] {"Administrador", "Cocinero", "Mesero", "Repartidor", "Supervisor"};
 
 
     @Override
@@ -63,8 +63,10 @@ public class EmpleadosVista extends AppCompatActivity implements View.OnClickLis
         agregar = (Button) findViewById(R.id.bt_agregar_emv);
         agregar.setOnClickListener(this);
         cargo = (Spinner) findViewById(R.id.sp_cargo_emv);
+
+        //Llenar Spiner con el vector de cargos
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, datos);
+                android.R.layout.simple_spinner_item, cargos);
         cargo.setAdapter(adapter);
     }
 
@@ -98,7 +100,7 @@ public class EmpleadosVista extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onResponse(String respuesta) {
                         JSonAdapter json = new JSonAdapter();
-                        ArrayList<Empleado> empleadosLista;
+                        final ArrayList<Empleado> empleadosLista;
                         try {
                             empleadosLista = json.empleadoAdapter(respuesta);
                             adapter = new EmpleadoAdapter(EmpleadosVista.this, empleadosLista);
@@ -107,11 +109,9 @@ public class EmpleadosVista extends AppCompatActivity implements View.OnClickLis
                             lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    /*Intent intent = new Intent(SeguimientoEtico.this, SegEticoEstudiante.class);
-                                    intent.putExtra("id",estudiantes.get(position).getIdentificacion());
-                                    startActivity(intent);*/
-                                    //tomar el id en la otra activity
-                                    //int id = getIntent().getIntExtra("id",0);
+                                    Intent intent = new Intent(EmpleadosVista.this, EmpleadoDetalle.class);
+                                    intent.putExtra("empleadoObject",empleadosLista.get(position));
+                                    startActivity(intent);
                                 }
                             });
                         } catch (JSONException e) {

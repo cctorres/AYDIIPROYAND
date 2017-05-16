@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/colorRedDark"
+    android:background="@drawable/fondo"
     tools:context="com.example.computador.pruebabdonline.Vista.VistaRestaurante">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/colorRedLight"
+        android:background="@color/colorBlackLight50"
         android:orientation="vertical"
         android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_nombre_empdv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@color/colorRedDark"
@@ -78,7 +78,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="169dp"
+        android:layout_height="148dp"
         android:layout_margin="15dp"
         android:background="@color/colorWhite"
         android:gravity="center"
@@ -88,13 +88,13 @@
         <ListView
             android:id="@+id/lv_pedidos_empdv"
             android:layout_width="match_parent"
-            android:layout_height="161dp"
+            android:layout_height="132dp"
             />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:background="@color/colorWhite"
         android:padding="10dp"
@@ -118,7 +118,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -126,6 +126,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorBlackLight50"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/colorWhite"
             android:text="Eliminar" />
 
         <Button
@@ -133,6 +137,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorBlackLight50"
+            android:textColor="@color/colorWhite"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
             android:text="Modificar" />
     </LinearLayout>
 </LinearLayout>

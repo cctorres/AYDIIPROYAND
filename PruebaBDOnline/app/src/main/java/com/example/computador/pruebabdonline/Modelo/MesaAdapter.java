@@ -1,30 +1,28 @@
 package com.example.computador.pruebabdonline.Modelo;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Response;
 import com.example.computador.pruebabdonline.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+public class MesaAdapter extends BaseAdapter {
 
-public class EmpleadoAdapter extends BaseAdapter{
-
-
-    private ArrayList<Empleado> empleados;
+    private ArrayList<Mesa> mesas;
     private Context context;
 
-    /**
-     * El constructor
-     * @param empleados
-     */
-    public EmpleadoAdapter(Context context, ArrayList<Empleado> empleados) {
-        this.empleados = empleados;
+
+    public MesaAdapter(Context context, ArrayList<Mesa> mesas) {
+        this.mesas = mesas;
         this.context = context;
 
     }
@@ -34,7 +32,7 @@ public class EmpleadoAdapter extends BaseAdapter{
      * elementos de nuestro ListView. Evidentemente es el tamaño del arraylist
      */
     public int getCount() {
-        return empleados.size();
+        return mesas.size();
     }
 
     /**
@@ -42,7 +40,7 @@ public class EmpleadoAdapter extends BaseAdapter{
      * El elemento es el Rectángulo, así que...
      */
     public Object getItem(int position) {
-        return empleados.get(position);
+        return mesas.get(position);
     }
 
     /**
@@ -66,21 +64,19 @@ public class EmpleadoAdapter extends BaseAdapter{
         if (convertView == null){
             //NO existe, creamos uno
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.item_empleado,null);
+            convertView = layoutInflater.inflate(R.layout.item_mesa,null);
         }
-        TextView cod = (TextView) convertView.findViewById(R.id.tv_codigo_iem);
-        TextView id = (TextView) convertView.findViewById(R.id.tv_identificador_iem);
-        TextView nombre = (TextView) convertView.findViewById(R.id.tv_nombre_iem);
-        TextView cargo = (TextView) convertView.findViewById(R.id.tv_cargo_iem);
-        TextView telefono = (TextView) convertView.findViewById(R.id.tv_telefono_iem);
 
-        cod.setText(Integer.toString(empleados.get(position).getCodEmpleado()));
-        id.setText(Integer.toString(empleados.get(position).getIdEmpleado()));
-        nombre.setText(empleados.get(position).getNombreEmpleado());
-        cargo.setText(empleados.get(position).getCargoEmpleado());
-        telefono.setText(Integer.toString(empleados.get(position).getTelefonoEmpleado()));
+        TextView estadoMesa = (TextView) convertView.findViewById(R.id.tv_estado_im);
+        TextView idMesa = (TextView) convertView.findViewById(R.id.tv_id_mesa_im);
+
+
+
+        idMesa.setText(Integer.toString(mesas.get(position).getIdMesa()));
+        estadoMesa.setText(mesas.get(position).getEstadoMesa());
+
+
 
         return convertView;
     }
 }
-

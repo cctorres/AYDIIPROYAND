@@ -1,5 +1,6 @@
 package com.example.computador.pruebabdonline.Modelo;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,24 +8,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.volley.Response;
 import com.example.computador.pruebabdonline.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+public class IngredienteAdapter extends BaseAdapter {
 
-public class EmpleadoAdapter extends BaseAdapter{
-
-
-    private ArrayList<Empleado> empleados;
+    private ArrayList<Ingrediente> ingredientes;
     private Context context;
 
-    /**
-     * El constructor
-     * @param empleados
-     */
-    public EmpleadoAdapter(Context context, ArrayList<Empleado> empleados) {
-        this.empleados = empleados;
+
+    public IngredienteAdapter(Context context, ArrayList<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
         this.context = context;
 
     }
@@ -34,7 +31,7 @@ public class EmpleadoAdapter extends BaseAdapter{
      * elementos de nuestro ListView. Evidentemente es el tamaño del arraylist
      */
     public int getCount() {
-        return empleados.size();
+        return ingredientes.size();
     }
 
     /**
@@ -42,7 +39,7 @@ public class EmpleadoAdapter extends BaseAdapter{
      * El elemento es el Rectángulo, así que...
      */
     public Object getItem(int position) {
-        return empleados.get(position);
+        return ingredientes.get(position);
     }
 
     /**
@@ -66,21 +63,17 @@ public class EmpleadoAdapter extends BaseAdapter{
         if (convertView == null){
             //NO existe, creamos uno
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.item_empleado,null);
+            convertView = layoutInflater.inflate(R.layout.item_ingrediente,null);
         }
-        TextView cod = (TextView) convertView.findViewById(R.id.tv_codigo_iem);
-        TextView id = (TextView) convertView.findViewById(R.id.tv_identificador_iem);
-        TextView nombre = (TextView) convertView.findViewById(R.id.tv_nombre_iem);
-        TextView cargo = (TextView) convertView.findViewById(R.id.tv_cargo_iem);
-        TextView telefono = (TextView) convertView.findViewById(R.id.tv_telefono_iem);
 
-        cod.setText(Integer.toString(empleados.get(position).getCodEmpleado()));
-        id.setText(Integer.toString(empleados.get(position).getIdEmpleado()));
-        nombre.setText(empleados.get(position).getNombreEmpleado());
-        cargo.setText(empleados.get(position).getCargoEmpleado());
-        telefono.setText(Integer.toString(empleados.get(position).getTelefonoEmpleado()));
+        TextView idIngrediente = (TextView) convertView.findViewById(R.id.tv_identificacion_ii);
+        TextView nomIngrediente = (TextView) convertView.findViewById(R.id.tv_nombre_ii);
+        TextView cantIngrediente = (TextView) convertView.findViewById(R.id.tv_cantidad_ii);
+
+        idIngrediente.setText(Integer.toString((ingredientes.get(position).getIdIngrediente())));
+        nomIngrediente.setText(ingredientes.get(position).getNombreIngrediente());
+        cantIngrediente.setText(Integer.toString((ingredientes.get(position).getCantIngrediente())));
 
         return convertView;
     }
 }
-

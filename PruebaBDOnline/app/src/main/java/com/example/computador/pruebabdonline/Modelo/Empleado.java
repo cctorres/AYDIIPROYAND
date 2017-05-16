@@ -1,10 +1,15 @@
 package com.example.computador.pruebabdonline.Modelo;
 
 
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Empleado {
+public class Empleado implements Serializable{
     int codEmpleado, idEmpleado,telefonoEmpleado;
     String nombreEmpleado, cargoEmpleado, contraseñaEmpleado;
+
+    public Empleado() {
+    }
 
     public Empleado(int codEmpleado, int idEmpleado, int telefonoEmpleado, String nombreEmpleado, String cargoEmpleado, String contraseñaEmpleado) {
         this.codEmpleado = codEmpleado;
@@ -62,4 +67,16 @@ public class Empleado {
     public void setContraseñaEmpleado(String contraseñaEmpleado) {
         this.contraseñaEmpleado = contraseñaEmpleado;
     }
+
+    public Empleado obtenerEmpleadoPorPedido(int idPedido, ArrayList<Empleado> lista){
+        Empleado retorno = null;
+        for(int i = 0; i< lista.size();i++){
+            int codEmp = lista.get(i).getCodEmpleado();
+            if(codEmp == idPedido){
+                retorno = lista.get(i);
+            }
+        }
+        return retorno;
+    }
+
 }

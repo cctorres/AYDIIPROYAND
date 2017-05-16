@@ -1,6 +1,5 @@
 package com.example.computador.pruebabdonline.Vista;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,33 +7,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.example.computador.pruebabdonline.Controlador.AsyncResponse;
 import com.example.computador.pruebabdonline.Controlador.DBController;
 import com.example.computador.pruebabdonline.Controlador.JSonAdapter;
-import com.example.computador.pruebabdonline.Controlador.ObtenerServiciosWebSingleton;
 import com.example.computador.pruebabdonline.Controlador.PHPGetter;
 import com.example.computador.pruebabdonline.Controlador.VolleySingleton;
 import com.example.computador.pruebabdonline.Modelo.Restaurante;
 import com.example.computador.pruebabdonline.R;
 
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 
 public class VistaRestaurante extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvNombre, tvDireccion, tvNumero, tvTelefono;
     private EditText etNombre, etDireccion, etNumero, etTelefono;
     private Button actualizar;
-    private ObtenerServiciosWebSingleton hiloconexion;
     private PHPGetter php = new PHPGetter();
     private DBController db = new DBController();
 

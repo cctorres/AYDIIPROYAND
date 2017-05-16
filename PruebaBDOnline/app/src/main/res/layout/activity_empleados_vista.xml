@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/colorRedDark"
+    android:background="@drawable/fondo"
     tools:context="com.example.computador.pruebabdonline.Vista.VistaRestaurante">
 
 
@@ -15,16 +15,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:background="@color/colorRedLight"
+        android:background="@color/colorBlackLight50"
         android:layout_margin="10dp"
         android:weightSum="1">
 
 
         <ListView
             android:id="@+id/lv_empleados_emv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="150sp"
-            android:layout_weight="1.92" />
+            android:layout_weight="1.92"
+            />
     </LinearLayout>
 
     <ScrollView
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:textSize="15dp"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColor="@color/colorRedDark" />
 
         <TextView
@@ -146,7 +147,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="15dp"
-            android:text="Agregar" />
+            android:text="Agregar"
+            android:padding="10dp"
+            android:background="@color/colorRedDark"
+            android:textColor="@color/colorWhite"/>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

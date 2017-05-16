@@ -97,29 +97,29 @@ class Pedido
      * @return PDOStatement
      */
     public static function insert(
-        $fecha_pedido,
-		$precio_pedido,
+		$fecha_pedido,
+        $precio_pedido,
 		$estado_pedido,
 		$codigos_comida_pedido,
 		$cod_empleado_pedido,
-		$id_mesa_pedido
+        $id_mesa_pedido
     )
     {
         // Sentencia INSERT
         $comando = "INSERT INTO Pedido ( " .
-            " fecha_pedido" .
-			" precio_pedido" .
-			" estado_pedido" .
-			" codigos_comida_pedido" .
-			" cod_empleado_pedido" .
-			" id_mesa_pedido" .
+            " fecha_pedido," .
+			" precio_pedido," .
+			" estado_pedido," .
+			" codigos_comida_pedido," .
+			" cod_empleado_pedido," .
+            " id_mesa_pedido)" .
             " VALUES( ?,?,?,?,?,?)";
         // Preparar la sentencia
         $sentencia = Database::getInstance()->getDb()->prepare($comando);
         return $sentencia->execute(
             array(
-                $fecha_pedido,
-				$precio_pedido,
+				$fecha_pedido,
+                $precio_pedido,
 				$estado_pedido,
 				$codigos_comida_pedido,
 				$cod_empleado_pedido,

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    android:padding="20dp"
+    tools:context="com.example.computador.pruebabdonline.Vista.ComidaDetalle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/iv_imagen_cd"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/ic_launcher_round"
+            android:layout_weight="0.7" />
+
+        <TextView
+            android:id="@+id/tv_nombre_cd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tv_precio_cd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="5dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tv_categoria_cd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="5dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tv_restriccion_cd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="5dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tv_descripcion_cd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="5dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tv_ingredientes_cd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="5dp"
+            android:text="TextView" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_eliminar_cd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBlackLight50"
+                android:textColor="@color/colorWhite"
+                android:text="Eliminar" />
+
+            <Button
+                android:id="@+id/bt_actualizar_cd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBlackLight50"
+                android:textColor="@color/colorWhite"
+                android:text="Actualizar" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

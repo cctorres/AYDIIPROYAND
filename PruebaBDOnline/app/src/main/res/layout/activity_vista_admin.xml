@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/fondo"
     tools:context="com.example.computador.pruebabdonline.Vista.VistaAdmin">
 
     <Button
@@ -16,7 +17,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="@string/btPedidos" />
+        android:text="@string/btPedidos"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorBlackLight50"/>
 
     <Button
         android:id="@+id/bt_carta_va"
@@ -26,6 +29,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorBlackLight50"
         android:text="@string/btCarta" />
 
     <Button
@@ -35,6 +40,8 @@
         android:ems="10"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorBlackLight50"
         android:layout_marginBottom="30dp"
         android:text="@string/btEmpleados" />
 
@@ -45,6 +52,8 @@
         android:ems="10"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorBlackLight50"
         android:layout_marginBottom="30dp"
         android:text="@string/btInventario" />
 
@@ -55,6 +64,8 @@
         android:ems="10"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorBlackLight50"
         android:layout_marginBottom="30dp"
         android:text="@string/btRestaurante" />
 </LinearLayout>

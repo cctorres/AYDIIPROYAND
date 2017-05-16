@@ -58,6 +58,7 @@ class Comida
      * en los nuevos valores relacionados con un identificador
      *
      * @param $id_comida       		identificador de la comida
+	 * @param $nombre_comida       	nuevo nombre de la comida
      * @param $precio_comida		nuevo precio de la comida
      * @param $categoria_comida		nueva categoria de la comida
 	 * @param $restriccion_comida	nueva restriccion de la comida
@@ -67,27 +68,28 @@ class Comida
 	 */
     public static function update(
         $id_comida,
-        $precio_comida,
+        $nombre_comida,
+		$precio_comida,
 		$categoria_comida,
-		$restriccion_comida,
+        $restriccion_comida,
 		$descripcion_comida,
 		$ingredientes_comida,
-        $foto_comida
+		$foto_comida
     )
     {
         // Creando consulta UPDATE
         $consulta = "UPDATE Comida" .
-            " SET precio_comida=?, categoria_comida=?, restriccion_comida=?, descripcion_comida=?, ingredientes_comida=?, foto_comida=? " .
+            " SET nombre_comida=?, precio_comida=?, categoria_comida=?, restriccion_comida=?, descripcion_comida=?, ingredientes_comida=?, foto_comida=? " .
             "WHERE id_comida=?";
         // Preparar la sentencia
         $cmd = Database::getInstance()->getDb()->prepare($consulta);
         // Relacionar y ejecutar la sentencia
-        $cmd->execute(array($precio_comida, $categoria_comida, $restriccion_comida, $descripcion_comida, $ingredientes_comida, $foto_comida, $id_mesa));
+        $cmd->execute(array($nombre_comida, $precio_comida, $categoria_comida, $restriccion_comida, $descripcion_comida, $ingredientes_comida, $foto_comida, $id_comida));
         return $cmd;
     }
     /**
      * Insertar una nueva Comida
-     *
+     * @param $nombre_comida		nombre de la comida
      * @param $precio_comida		precio de la comida
      * @param $categoria_comida		categoria de la comida
 	 * @param $restriccion_comida	restriccion de la comida
@@ -97,6 +99,7 @@ class Comida
      * @return PDOStatement
      */
     public static function insert(
+		$nombre_comida,
         $precio_comida,
 		$categoria_comida,
 		$restriccion_comida,
@@ -107,17 +110,19 @@ class Comida
     {
         // Sentencia INSERT
         $comando = "INSERT INTO Comida ( " .
-            " precio_comida" .
-			" categoria_comida" .
-			" restriccion_comida" .
-			" descripcion_comida" .
-			" ingredientes_comida" .
-            " foto_comida" .
-            " VALUES( ?,?,?,?,?,?)";
+            " nombre_comida," .
+			" precio_comida," .
+			" categoria_comida," .
+			" restriccion_comida," .
+			" descripcion_comida," .
+			" ingredientes_comida," .
+            " foto_comida)" .
+            " VALUES( ?,?,?,?,?,?,?)";
         // Preparar la sentencia
         $sentencia = Database::getInstance()->getDb()->prepare($comando);
         return $sentencia->execute(
             array(
+				$nombre_comida,
                 $precio_comida,
 				$categoria_comida,
 				$restriccion_comida,

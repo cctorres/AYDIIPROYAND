@@ -1,10 +1,14 @@
 package com.example.computador.pruebabdonline.Modelo;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -13,18 +17,18 @@ import com.example.computador.pruebabdonline.R;
 import java.util.ArrayList;
 
 
-public class EmpleadoAdapter extends BaseAdapter{
+public class ComidaAdapter extends BaseAdapter{
 
 
-    private ArrayList<Empleado> empleados;
+    private ArrayList<Comida> comidas;
     private Context context;
 
     /**
      * El constructor
-     * @param empleados
+     * @param comidas
      */
-    public EmpleadoAdapter(Context context, ArrayList<Empleado> empleados) {
-        this.empleados = empleados;
+    public ComidaAdapter(Context context, ArrayList<Comida> comidas) {
+        this.comidas = comidas;
         this.context = context;
 
     }
@@ -34,7 +38,7 @@ public class EmpleadoAdapter extends BaseAdapter{
      * elementos de nuestro ListView. Evidentemente es el tamaño del arraylist
      */
     public int getCount() {
-        return empleados.size();
+        return comidas.size();
     }
 
     /**
@@ -42,7 +46,7 @@ public class EmpleadoAdapter extends BaseAdapter{
      * El elemento es el Rectángulo, así que...
      */
     public Object getItem(int position) {
-        return empleados.get(position);
+        return comidas.get(position);
     }
 
     /**
@@ -66,21 +70,23 @@ public class EmpleadoAdapter extends BaseAdapter{
         if (convertView == null){
             //NO existe, creamos uno
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.item_empleado,null);
+            convertView = layoutInflater.inflate(R.layout.item_comida,null);
         }
-        TextView cod = (TextView) convertView.findViewById(R.id.tv_codigo_iem);
-        TextView id = (TextView) convertView.findViewById(R.id.tv_identificador_iem);
-        TextView nombre = (TextView) convertView.findViewById(R.id.tv_nombre_iem);
-        TextView cargo = (TextView) convertView.findViewById(R.id.tv_cargo_iem);
-        TextView telefono = (TextView) convertView.findViewById(R.id.tv_telefono_iem);
 
-        cod.setText(Integer.toString(empleados.get(position).getCodEmpleado()));
-        id.setText(Integer.toString(empleados.get(position).getIdEmpleado()));
-        nombre.setText(empleados.get(position).getNombreEmpleado());
-        cargo.setText(empleados.get(position).getCargoEmpleado());
-        telefono.setText(Integer.toString(empleados.get(position).getTelefonoEmpleado()));
+        ImageView imagen = (ImageView) convertView.findViewById(R.id.iv_imagen_icom);
+        TextView nombre = (TextView) convertView.findViewById(R.id.tv_nombre_comida_icom);
+        TextView precio = (TextView) convertView.findViewById(R.id.tv_precio_icom);
+
+        final String encodedString = comidas.get(position).getFotoComida();
+        final String pureBase64Encoded = encodedString.substring(encodedString.indexOf(",")  + 1);
+        final byte[] decodedBytes = Base64.decode(pureBase64Encoded, Base64.DEFAULT);
+        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+
+
+        imagen.setImageBitmap(decodedBitmap);
+        nombre.setText(comidas.get(position).getNombreComida());
+        precio.setText("$"+Integer.toString(comidas.get(position).getPrecioComida()));
 
         return convertView;
     }
 }
-

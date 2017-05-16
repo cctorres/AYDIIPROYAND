@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:layout_gravity="center_horizontal">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/tv_nombre_dialog_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Nombre de la comida: "
+                android:layout_marginTop="5dp"/>
+
+            <EditText
+                android:id="@+id/et_nombre_dialog_ac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:inputType="text"
+                android:hint="Nombre"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/tv_precio_dialog_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Precio de la comida: "
+                android:layout_marginTop="5dp"/>
+
+            <EditText
+                android:id="@+id/et_precio_dialog_ac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:inputType="number"
+                android:hint="0"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/tv_categoria_dialog_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Categoria de la comida: "
+                android:layout_marginTop="5dp"/>
+
+            <Spinner
+                android:id="@+id/sp_categoria_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_restriccion_dialog_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Restricción de la comida: "
+                android:layout_marginTop="5dp"/>
+
+            <Spinner
+                android:id="@+id/sp_restriccion_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_descripcion_dialog_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Descripción de la comida: "
+                android:layout_marginTop="5dp"/>
+
+            <EditText
+                android:id="@+id/et_descrpcion_dialog_ac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:inputType="text"
+                android:hint="Descripción"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/tv_ingredientes_dialog_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="Ingredientes de la comida: "
+                android:layout_marginTop="5dp"/>
+
+            <EditText
+                android:id="@+id/et_ingredientes_dialog_ac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:textColor="@color/colorRedDark"
+                android:textSize="18dp"
+                android:inputType="text"
+                android:hint="Arroz,Sal,Leche,Etc"
+                android:layout_marginBottom="5dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/bt_cancelar_dialog_ac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:layout_margin="3dp"
+            android:background="@color/colorRedDark"
+            android:textColor="@color/colorWhite"/>
+
+        <Button
+            android:id="@+id/bt_confirmar_dialog_ac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@color/colorRedDark"
+            android:textColor="@color/colorWhite"
+            android:text="Confirmar" />
+
+        <Button
+            android:id="@+id/bt_imagen_dialog_ac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@color/colorRedDark"
+            android:textColor="@color/colorWhite"
+            android:text="Imagen" />
+    </LinearLayout>
+
+</LinearLayout>

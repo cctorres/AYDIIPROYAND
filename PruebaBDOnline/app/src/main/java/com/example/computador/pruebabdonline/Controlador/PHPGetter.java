@@ -5,7 +5,7 @@ package com.example.computador.pruebabdonline.Controlador;
 public class PHPGetter {
 
     //URL del servidor
-    String URLD = "http://aydandroid.esy.es/";
+    String URLD = "http://aydandroid.esy.es";
     //rutas de los Web Services de la Tabla Mesa
     String obtenerMesas = URLD + "/obtenerMesas.php";
     String obtenerMesaByID = URLD + "/obtenerMesaByID.php";
@@ -35,6 +35,12 @@ public class PHPGetter {
     String insertarRestaurante = URLD + "/insertarRestaurante.php";
     String borrarRestaurante = URLD + "/borrarRestaurante.php";
     String actualizarRestaurante = URLD + "/actualizarRestaurante.php";
+    //rutas de los Web Services de la tabla Ingrediente
+    String obtenerIngredientes = URLD + "/obtenerIngrediente.php";
+    String obtenerIngredienteByID = URLD + "/obtenerIngredienteByID.php";
+    String insertarIngrediente = URLD + "/insertarIngrediente.php";
+    String borrarIngrediente = URLD + "/borrarIngrediente.php";
+    String actualizarIngrediente = URLD + "/actualizarIngrediente.php";
 
     public String getURLD() {
         return URLD;
@@ -134,5 +140,45 @@ public class PHPGetter {
 
     public String getActualizarRestaurante() {
         return actualizarRestaurante;
+    }
+
+    public String getObtenerIngredientes() {
+        return obtenerIngredientes;
+    }
+
+    public void setObtenerIngredientes(String obtenerIngredientes) {
+        this.obtenerIngredientes = obtenerIngredientes;
+    }
+
+    public String getObtenerIngredienteByID() {
+        return obtenerIngredienteByID;
+    }
+
+    public void setObtenerIngredienteByID(String obtenerIngredienteByID) {
+        this.obtenerIngredienteByID = obtenerIngredienteByID;
+    }
+
+    public String getInsertarIngrediente() {
+        return insertarIngrediente;
+    }
+
+    public void setInsertarIngrediente(String insertarIngrediente) {
+        this.insertarIngrediente = insertarIngrediente;
+    }
+
+    public String getBorrarIngrediente() {
+        return borrarIngrediente;
+    }
+
+    public void setBorrarIngrediente(String borrarIngrediente) {
+        this.borrarIngrediente = borrarIngrediente;
+    }
+
+    public String getActualizarIngrediente() {
+        return actualizarIngrediente;
+    }
+
+    public void setActualizarIngrediente(String actualizarIngrediente) {
+        this.actualizarIngrediente = actualizarIngrediente;
     }
 }

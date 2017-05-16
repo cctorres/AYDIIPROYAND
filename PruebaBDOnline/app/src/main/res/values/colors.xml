@@ -5,8 +5,9 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorRedDark">#780002</color>
-    <color name="colorRedLight">#22000000</color>
+    <color name="colorRedDarkLight">#a61417</color>
+    <color name="colorBlackLight50">#22000000</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="colorWhiteOpacity">#35ffffff</color>
+    <color name="colorWhiteLight">#e4ffffff</color>
 
 </resources>

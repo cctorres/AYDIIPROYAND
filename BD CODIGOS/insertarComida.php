@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $body = json_decode(file_get_contents("php://input"), true);
     // Insertar comida
     $retorno = Comida::insert(
-        $body['id_comida'],
+		$body['nombre_comida'],
 		$body['precio_comida'],
 		$body['categoria_comida'],
 		$body['restriccion_comida'],

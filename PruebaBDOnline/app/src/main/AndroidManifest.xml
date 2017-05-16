@@ -5,6 +5,7 @@
     <uses-permission
         android:name="android.permission.INTERNET"
         android:maxSdkVersion="19" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".Vista.PruebaMesa"
-            android:label="@string/title_activity_prueba_mesa"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Vista.inicioSesion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +24,12 @@
         <activity android:name=".Vista.VistaAdmin" />
         <activity android:name=".Vista.VistaRestaurante" />
         <activity android:name=".Vista.EmpleadosVista" />
-        <activity android:name=".Vista.EmpleadoDetalle"></activity>
+        <activity android:name=".Vista.EmpleadoDetalle" />
+        <activity android:name=".Vista.IngredienteVista" />
+        <activity android:name=".Vista.MenuVista" />
+        <activity android:name=".Modelo.ComidaAdapter" />
+        <activity android:name=".Vista.ComidaDetalle" />
+        <activity android:name=".Vista.PedidosVista" />
     </application>
 
 </manifest>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:layout_gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/tv_nombre_dialog_ae"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/colorRedDark"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:text="Nombre del empleado:"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_nombre_dialog_ae"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:textColor="@color/colorRedDark"
+        android:textSize="18dp"
+        android:inputType="text"
+        android:layout_marginBottom="15dp"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/tv_codigo_dialog_ae"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/colorRedDark"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:text="Nro Codigo del empleado:" />
+
+    <EditText
+        android:id="@+id/et_identificacion_dialog_ae"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:textColor="@color/colorRedDark"
+        android:textSize="18dp"
+        android:inputType="number"
+        android:layout_marginBottom="15dp"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/tv_cargo_dialog_ae"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/colorRedDark"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:text="Cargo del empleado:" />
+
+    <EditText
+        android:id="@+id/et_cargo_dialog_ae"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:textColor="@color/colorRedDark"
+        android:textSize="18dp"
+        android:inputType="text"
+        android:layout_marginBottom="15dp"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/tv_telefono_dialog_ae"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/colorRedDark"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:text="Telefono del empleado" />
+
+    <EditText
+        android:id="@+id/et_telefono_dialog_ae"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:textColor="@color/colorRedDark"
+        android:textSize="18dp"
+        android:inputType="number"
+        android:layout_marginBottom="15dp"
+        android:text="Name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/bt_cancelar_dialog_ae"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorRedDark"
+            android:textColor="@color/colorWhite"/>
+
+        <Button
+            android:id="@+id/bt_confirmar_dialog_ae"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorRedDark"
+            android:textColor="@color/colorWhite"
+            android:text="Confirmar" />
+    </LinearLayout>
+
+</LinearLayout>

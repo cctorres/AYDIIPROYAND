@@ -1,10 +1,12 @@
 package com.example.computador.pruebabdonline.Modelo;
 
+import java.io.Serializable;
+
 /**
 * Clase que representa el objeto Mesa
  */
 
-public class Mesa {
+public class Mesa implements Serializable{
 
     //Atributos
     private int idMesa;

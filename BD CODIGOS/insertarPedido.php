@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $body = json_decode(file_get_contents("php://input"), true);
     // Insertar pedido
     $retorno = Pedido::insert(
-        $body['id_pedido'],
 		$body['fecha_pedido'],
 		$body['precio_pedido'],
 		$body['estado_pedido'],
