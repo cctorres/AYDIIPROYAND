@@ -43,13 +43,5 @@ public class Mesa implements Serializable{
         this.idPedidoMesa = idPedidoMesa;
     }
 
-    /**
-     * Compara los atributos de dos mesas
-     * @param mesa mesa externa
-     * @return true si son iguales, false si hay cambios
-     */
-    public boolean compararCon(Mesa mesa) {
-        return (this.estadoMesa.equalsIgnoreCase(mesa.estadoMesa)  &&
-                this.idPedidoMesa == mesa.idPedidoMesa);
-    }
+
 }

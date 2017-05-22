@@ -4,6 +4,8 @@ package com.example.computador.pruebabdonline.Controlador;
 
 public class PHPGetter {
 
+    //Clase que solamente da el getter de las URL de los PHP
+
     //URL del servidor
     String URLD = "http://aydandroid.esy.es";
     //rutas de los Web Services de la Tabla Mesa

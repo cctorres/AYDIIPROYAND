@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorWhite"
-                android:text="Lactosa" />
+                android:text="Bajo en lactosa" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorWhite"
-                android:text="Calorias" />
+                android:text="Bajo en calorias" />
 
             <CheckBox
                 android:id="@+id/cb_azucar_mv"
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
                 android:layout_weight="1"
-                android:text="Azúcar" />
+                android:text="Bajo en azúcar" />
 
         </LinearLayout>
     </LinearLayout>
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/colorWhite"
-            android:text="Editar" />
+            android:text="Ver datos" />
 
 
     </LinearLayout>

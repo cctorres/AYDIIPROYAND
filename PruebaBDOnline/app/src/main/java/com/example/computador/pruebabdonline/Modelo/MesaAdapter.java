@@ -29,7 +29,7 @@ public class MesaAdapter extends BaseAdapter {
 
     /**
      * Este método devuelve el número de
-     * elementos de nuestro ListView. Evidentemente es el tamaño del arraylist
+     * elementos de nuestro ListView.
      */
     public int getCount() {
         return mesas.size();
@@ -37,7 +37,6 @@ public class MesaAdapter extends BaseAdapter {
 
     /**
      * Este método  devuele el elemento de una posición determinada.
-     * El elemento es el Rectángulo, así que...
      */
     public Object getItem(int position) {
         return mesas.get(position);
@@ -52,12 +51,12 @@ public class MesaAdapter extends BaseAdapter {
     }
 
     /**
-     * El método más complicado. Aquí tenemos que devolver el View a representar.
-     * En este método nos pasan 3 valores. El primero es la posición del elemento,
-     * el segundo es el View a utilizar que será uno que ya no esté visible y que
-     * lo reutilizaremos, y el último es el ViewGroup, es en nuestro caso, el ListView.
+     * Setea los datos dle objeto del listvire en el Adapter
+     * @param position Posición del Item en el Listview
+     * @param convertView Vista
+     * @param parent Array con el que se llenará el ListView
+     * @return
      */
-
     public View getView(int position, View convertView, ViewGroup parent) {
 
 

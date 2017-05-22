@@ -9,17 +9,16 @@
     android:background="@drawable/fondo"
     tools:context="com.example.computador.pruebabdonline.Vista.VistaAdmin">
 
-    <Button
-        android:id="@+id/bt_pedidos_va"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tv_restaurante_va"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:textAlignment="center"
         android:layout_marginBottom="30dp"
-        android:text="@string/btPedidos"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorBlackLight50"/>
+        android:textSize="30dp"
+        android:textColor="@color/colorWhite"/>
 
     <Button
         android:id="@+id/bt_carta_va"
@@ -44,18 +43,6 @@
         android:background="@color/colorBlackLight50"
         android:layout_marginBottom="30dp"
         android:text="@string/btEmpleados" />
-
-    <Button
-        android:id="@+id/bt_inventario_va"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorBlackLight50"
-        android:layout_marginBottom="30dp"
-        android:text="@string/btInventario" />
 
     <Button
         android:id="@+id/bt_restaurante_va"

@@ -88,26 +88,5 @@ public class Comida implements Serializable{
         this.fotoComida = fotoComida;
     }
 
-    public ArrayList<Comida> filtrarCategoria(ArrayList<Comida> listaComidas, String categoria){
-        if(categoria.equalsIgnoreCase("todas")){
-            return(listaComidas);
-        }
-        ArrayList<Comida> resultado = new ArrayList<Comida>();
-        for(int i = 0;i<listaComidas.size();i++){
-            if(listaComidas.get(i).getCategoriaComida().equalsIgnoreCase(categoria)){
-                resultado.add(listaComidas.get(i));
-            }
-        }
-        return resultado;
-    }
 
-    public ArrayList<Comida> filtrarRestriccion(ArrayList<Comida> listaComidas, String restriccion){
-        ArrayList<Comida> resultado = new ArrayList<Comida>();
-        for(int i = 0;i<listaComidas.size();i++){
-            if(!listaComidas.get(i).getRestriccionComida().equalsIgnoreCase(restriccion)){
-                resultado.add(listaComidas.get(i));
-            }
-        }
-        return resultado;
-    }
 }

@@ -175,11 +175,11 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
                         final ArrayList<Pedido> pedidosLista;
                         try {
                             pedidosLista = json.pedidoAdapter(respuesta);
-                            adapter = new PedidoAdapter(EmpleadoDetalle.this, pedidosLista, emp.getCodEmpleado());
-                            lvPedidos = (ListView) findViewById(R.id.lv_pedidos_empdv);
-                            lvPedidos.setAdapter(adapter);
                             Pedido p = new Pedido();
                             ArrayList<Pedido> aux = p.filtrarPedidoEmpleado(pedidosLista, emp.getCodEmpleado());
+                            adapter = new PedidoAdapter(EmpleadoDetalle.this, aux, emp.getCodEmpleado());
+                            lvPedidos = (ListView) findViewById(R.id.lv_pedidos_empdv);
+                            lvPedidos.setAdapter(adapter);
                             pedidoTotal.setText("Total de pedidos: "+ Integer.toString(aux.size()));
                             aux = p.filtrarPedidoEmpleadoYDia(pedidosLista, emp.getCodEmpleado());
                             pedidoDiario.setText("Total de pedidos hoy: "+aux.size());

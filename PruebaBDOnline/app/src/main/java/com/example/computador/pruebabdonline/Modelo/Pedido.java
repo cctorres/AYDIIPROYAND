@@ -80,6 +80,12 @@ public class Pedido {
         this.fechaPedido = fechaPedido;
     }
 
+    /**
+     *
+     * @param listaPedidos Array con todos los pedidos
+     * @param codEmpleado cod del empleado al cual se le buscará los pedidos
+     * @return Retorna un array con los pedidos del empleado
+     */
     public ArrayList<Pedido> filtrarPedidoEmpleado(ArrayList<Pedido> listaPedidos, int codEmpleado){
         ArrayList<Pedido> listaFiltrada = new ArrayList<>();
         for(int i = 0; i<listaPedidos.size();i++){
@@ -90,6 +96,12 @@ public class Pedido {
         return (listaFiltrada);
     }
 
+    /**
+     *
+     * @param listaPedidos Array con todos los pedidos
+     * @param codEmpleado cod del empleado al cual se le buscará los pedidos
+     * @return Retorna un array con los pedidos del empleado hechos en el día actual
+     */
     public ArrayList<Pedido> filtrarPedidoEmpleadoYDia(ArrayList<Pedido> listaPedidos, int codEmpleado){
         Time dia = new Time (Time.getCurrentTimezone());
         dia.setToNow();
@@ -105,15 +117,6 @@ public class Pedido {
         return (listaFiltrada);
     }
 
-    public Pedido obtenerPedidoPorID(int idPedido, ArrayList<Pedido> listaPedidos){
-        Pedido retorno = null;
-        for(int i = 0; i<listaPedidos.size();i++){
-            int id = listaPedidos.get(i).getIdPedido();
-            if(id == idPedido){
-                retorno = listaPedidos.get(i);
-            }
-        }
-        return retorno;
-    }
+
 
 }

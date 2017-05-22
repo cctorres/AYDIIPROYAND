@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -46,9 +47,15 @@ public class VistaRestaurante extends AppCompatActivity implements View.OnClickL
         etTelefono = (EditText) findViewById(R.id.et_telefono_vr);
 
         actualizar = (Button) findViewById(R.id.bt_actualizar_vr);
+
+        //Listener de los botones
         actualizar.setOnClickListener(this);
     }
 
+    /**
+     * Métodos de los botones
+     * @param v Vista
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -57,6 +64,12 @@ public class VistaRestaurante extends AppCompatActivity implements View.OnClickL
                 String direccion = etDireccion.getText().toString();
                 String numero = etNumero.getText().toString();
                 String telefono = etTelefono.getText().toString();
+                //Valida que los datos se hallan ingresado
+                if(nombre.equals("") | direccion.equals("") | numero.equals("") | telefono.equals("")){
+                    Toast.makeText(this, "Faltan datos por llenar", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                //Se hace una petición de actualizar el restaurante
                 db.actualizarRestaurante(nombre,direccion,numero,telefono,this);
                 this.refrescarActiviry();
                 break;
@@ -68,8 +81,8 @@ public class VistaRestaurante extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-        String url = php.getObtenerRestaurantes();
-
+        String url = php.getObtenerRestaurantes();//Pide el url del PHP necesario
+        //Hace una petición volley para obtener los datos del restaurante
         StringRequest peticion = new StringRequest(
                 Request.Method.GET,
                 url,
@@ -83,6 +96,8 @@ public class VistaRestaurante extends AppCompatActivity implements View.OnClickL
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        //Setea los datos del restaurante en los TextViews correspondientes
                         tvNombre.setText("Nombre: "+restaurante.getNombre());
                         tvDireccion.setText("Dirección: "+restaurante.getDireccion());
                         tvNumero.setText("Mesas: "+Integer.toString(restaurante.getNumeroMesas()));
@@ -104,6 +119,9 @@ public class VistaRestaurante extends AppCompatActivity implements View.OnClickL
 
     }
 
+    /**
+     * Cierra y reabre la activity
+     */
     public void refrescarActiviry(){
         Intent intent = getIntent();
         finish();

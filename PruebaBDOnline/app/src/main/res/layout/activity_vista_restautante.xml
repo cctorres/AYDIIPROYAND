@@ -69,112 +69,122 @@
             android:textSize="18dp"
             android:textStyle="bold" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/editText5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Nombre Restaurante"
+                        android:textColor="@color/colorRedDark"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_nombrer_vr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text=""
+                        android:textColor="@color/colorRedDark"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/editText8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Dirección"
+                        android:textColor="@color/colorRedDark"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_direccion_vr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text=""
+                        android:textColor="@color/colorRedDark"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/editText7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Número de mesas"
+                        android:textColor="@color/colorRedDark"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_numero_vr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="phone"
+                        android:text=""
+                        android:textColor="@color/colorRedDark"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/editText6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Telefono"
+                        android:textColor="@color/colorRedDark"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_telefono_vr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="phone"
+                        android:text=""
+                        android:textColor="@color/colorRedDark"
+                        android:textSize="15dp" />
+
+                    <Button
+                        android:id="@+id/bt_actualizar_vr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorRedDark"
+                        android:padding="10dp"
+                        android:text="Actualizar"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorWhite"
-        android:padding="10dp"
-        android:layout_margin="15dp"
-        android:gravity="center"
-        >
-
-        <TextView
-            android:id="@+id/editText5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textColor="@color/colorRedDark"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:inputType="textPersonName"
-            android:text="Nombre Restaurante"
-            />
-
-        <EditText
-            android:id="@+id/et_nombrer_vr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="15dp"
-            android:inputType="textPersonName"
-            android:textColor="@color/colorRedDark"
-            android:text="" />
-
-        <TextView
-            android:id="@+id/editText8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="15dp"
-            android:textColor="@color/colorRedDark"
-            android:textStyle="bold"
-            android:inputType="textPersonName"
-            android:text="Dirección" />
-
-        <EditText
-            android:id="@+id/et_direccion_vr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="15dp"
-            android:textColor="@color/colorRedDark"
-            android:inputType="textPersonName"
-            android:text="" />
-
-        <TextView
-            android:id="@+id/editText7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="15dp"
-            android:textColor="@color/colorRedDark"
-            android:textStyle="bold"
-            android:inputType="textPersonName"
-            android:text="Número de mesas" />
-
-        <EditText
-            android:id="@+id/et_numero_vr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="15dp"
-            android:textColor="@color/colorRedDark"
-            android:inputType="phone"
-            android:text="" />
-
-        <TextView
-            android:id="@+id/editText6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="15dp"
-            android:textColor="@color/colorRedDark"
-            android:textStyle="bold"
-            android:inputType="textPersonName"
-            android:text="Telefono" />
-
-        <EditText
-            android:id="@+id/et_telefono_vr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="15dp"
-            android:textColor="@color/colorRedDark"
-            android:inputType="phone"
-            android:text="" />
-
-        <Button
-            android:id="@+id/bt_actualizar_vr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:padding="10dp"
-            android:background="@color/colorRedDark"
-            android:textColor="@color/colorWhite"
-            android:text="Actualizar" />
-    </LinearLayout>
 </LinearLayout>

@@ -7,6 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 public final class VolleySingleton {
+    //Clase que adapta un Singleton para la petición de Volley y que la llamada asincrona no se bloquee
 
     // Atributos
     private static VolleySingleton singleton;
@@ -18,6 +19,7 @@ public final class VolleySingleton {
         requestQueue = getRequestQueue();
     }
 
+    //Se cerciora que solo halla una instancia del VolleySingleton
     public static synchronized VolleySingleton getInstance(Context context) {
         if (singleton == null) {
             singleton = new VolleySingleton(context);

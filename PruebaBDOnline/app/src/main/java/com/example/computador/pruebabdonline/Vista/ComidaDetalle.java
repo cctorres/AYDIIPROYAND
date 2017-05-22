@@ -4,6 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,10 +19,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.computador.pruebabdonline.Controlador.DBController;
+import com.example.computador.pruebabdonline.Controlador.PHPGetter;
 import com.example.computador.pruebabdonline.Modelo.Comida;
+import com.example.computador.pruebabdonline.Modelo.Empleado;
 import com.example.computador.pruebabdonline.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
 
 public class ComidaDetalle extends AppCompatActivity implements View.OnClickListener{
 
@@ -31,6 +54,7 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
     private TextView nomComida, precioComida, catComida, resComida, descComida, ingreComida;
     private ImageView fotoComida;
     private Button eliminar, modificar;
+    private Empleado usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +63,7 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
 
         //tomar la comida de la otra activity
         com = (Comida) getIntent().getSerializableExtra("comidaObject");
+        usuario = (Empleado) getIntent().getSerializableExtra("usuario");
 
         fotoComida = (ImageView) findViewById(R.id.iv_imagen_cd);
         nomComida = (TextView) findViewById(R.id.tv_nombre_cd);
@@ -52,6 +77,11 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
 
         eliminar.setOnClickListener(this);
         modificar.setOnClickListener(this);
+
+        if(!usuario.getCargoEmpleado().equalsIgnoreCase("administrador")){
+            eliminar.setEnabled(false);
+            modificar.setEnabled(false);
+        }
     }
 
     @Override
@@ -168,9 +198,13 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
                         if(codigoImagen.equalsIgnoreCase("")){
                             codigoImagen = com.getFotoComida();
                         }
+                        PHPGetter php = new PHPGetter();
+                        actualizarComida act = new actualizarComida();
+                        act.execute(php.getActualizarComida(),"4",id,nombre,precio,categoria,restriccion,descripcion,ingredientes,codigoImagen);
+                        /*
                         DBController db = new DBController();
                         db.actualizarComida(id,nombre,precio,categoria,restriccion,descripcion,ingredientes,codigoImagen,ComidaDetalle.this);
-                        finish();
+                        */finish();
                         ComidaDetalle.this.finish();
                         ComidaDetalle.this.startActivity(ComidaDetalle.this.getIntent());
                     }
@@ -189,4 +223,134 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
         restriccionessp.setAdapter(adapterRest);
     }
 
-}
+    public class actualizarComida extends AsyncTask<String,Void,String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String cadena = params[0];
+            URL url = null; // Url de donde queremos obtener información
+            String devuelve ="";
+
+            if(params[1].equalsIgnoreCase("4")){    // update
+
+                try {
+                    HttpURLConnection urlConn;
+
+                    DataOutputStream printout;
+                    DataInputStream input;
+                    url = new URL(cadena);
+                    urlConn = (HttpURLConnection) url.openConnection();
+                    urlConn.setDoInput(true);
+                    urlConn.setDoOutput(true);
+                    urlConn.setUseCaches(false);
+                    urlConn.setRequestProperty("Content-Type", "application/json");
+                    urlConn.setRequestProperty("Accept", "application/json");
+                    urlConn.connect();
+                    //Creo el Objeto JSON
+                    HashMap<String, String> jsonParam = new HashMap();
+
+                    jsonParam.put("id_comida",params[2]);
+                    jsonParam.put("nombre_comida", params[3]);
+                    jsonParam.put("precio_comida", params[4]);
+                    jsonParam.put("categoria_comida", params[5]);
+                    jsonParam.put("restriccion_comida", params[6]);
+                    jsonParam.put("descripcion_comida", params[7]);
+                    jsonParam.put("ingredientes_comida", params[8]);
+                    jsonParam.put("foto_comida", params[9]);
+                    JSONObject json = new JSONObject(jsonParam);
+                    // Envio los parámetros post.
+                    OutputStream os = urlConn.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(
+                            new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(json.toString());
+                    writer.flush();
+                    writer.close();
+
+                    int respuesta = urlConn.getResponseCode();
+
+
+                    StringBuilder result = new StringBuilder();
+
+                    if (respuesta == HttpURLConnection.HTTP_OK) {
+
+                        String line;
+                        BufferedReader br=new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+                        while ((line=br.readLine()) != null) {
+                            result.append(line);
+                            //response+=line;
+                        }
+
+                        //Creamos un objeto JSONObject para poder acceder a los atributos (campos) del objeto.
+                        JSONObject respuestaJSON = new JSONObject(result.toString());   //Creo un JSONObject a partir del StringBuilder pasado a cadena
+                        //Accedemos al vector de resultados
+
+                        String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
+
+                        if (resultJSON.equalsIgnoreCase("1")) {      // hay un alumno que mostrar
+                            devuelve = "Alumno actualizado correctamente";
+
+                        } else if (resultJSON.equalsIgnoreCase("2")) {
+                            devuelve = "El alumno no pudo actualizarse";
+                        }
+
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return devuelve;
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onCancelled(String s) {
+            super.onCancelled(s);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            switch (requestCode){
+                case SELECT_PICTURE:
+                    Uri path = data.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path);
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                        byte[] byteArray = stream.toByteArray();
+                        codigoImagen = byteArray.toString();
+                        codigoImagen = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                        Toast.makeText(this, "Imagen seleccionada", Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
+    }
+        }

@@ -68,15 +68,4 @@ public class Empleado implements Serializable{
         this.contraseñaEmpleado = contraseñaEmpleado;
     }
 
-    public Empleado obtenerEmpleadoPorPedido(int idPedido, ArrayList<Empleado> lista){
-        Empleado retorno = null;
-        for(int i = 0; i< lista.size();i++){
-            int codEmp = lista.get(i).getCodEmpleado();
-            if(codEmp == idPedido){
-                retorno = lista.get(i);
-            }
-        }
-        return retorno;
-    }
-
 }

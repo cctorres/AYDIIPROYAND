@@ -12,31 +12,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="97dp"
         android:orientation="vertical"
         android:padding="10dp"
         android:background="@color/colorBlackLight50"
-        android:layout_margin="10dp"
-        android:weightSum="1">
+        android:layout_margin="10dp">
 
 
         <ListView
             android:id="@+id/lv_empleados_emv"
             android:layout_width="match_parent"
             android:layout_height="150sp"
-            android:layout_weight="1.92"
-            />
+            android:layout_weight="1.92" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_gravity="bottom"
         android:layout_height="wrap_content">
     <LinearLayout
-
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/colorWhite"
         android:padding="10dp"
@@ -142,13 +137,32 @@
             android:textColor="@color/colorRedDark"
             android:inputType="textPassword" />
 
+        <TextView
+            android:id="@+id/editText10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="15dp"
+            android:textColor="@color/colorRedDark"
+            android:textStyle="bold"
+            android:inputType="textPersonName"
+            android:text="Verificar contraseña:" />
+
+        <EditText
+            android:id="@+id/et_verificarcontraseña_emv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="15dp"
+            android:textColor="@color/colorRedDark"
+            android:inputType="textPassword" />
+
         <Button
             android:id="@+id/bt_agregar_emv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="15dp"
+            android:layout_height="38dp"
+            android:textSize="10dp"
             android:text="Agregar"
-            android:padding="10dp"
             android:background="@color/colorRedDark"
             android:textColor="@color/colorWhite"/>
     </LinearLayout>

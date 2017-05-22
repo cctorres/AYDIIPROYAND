@@ -1,6 +1,7 @@
 package com.example.computador.pruebabdonline.Vista;
 
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -56,12 +57,15 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
     private final int SELECT_PICTURE = 300;
     private String codigoImagen = "";
     private Empleado usuario;
+    private String nroMesaSel;
+    private Comida comidaSel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_vista);
 
+        //Conexión de los componentes visuales
         lvListaComidas = (ListView) findViewById(R.id.lv_comidas_mv);
         agregar = (Button) findViewById(R.id.bt_agregar_mv);
         filtrar = (Button) findViewById(R.id.bt_filtrar_mv);
@@ -71,13 +75,16 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
         cbEditar = (CheckBox) findViewById(R.id.cb_editar);
         spCategorias = (Spinner) findViewById(R.id.sp_categoria_mv);
 
-
+        //Listener de los botones
         agregar.setOnClickListener(this);
         filtrar.setOnClickListener(this);
 
         llenarSpinnerCategoria(categorias,spCategorias);
 
+        //Obtiene el usuario de la activity anterior
         usuario = (Empleado) getIntent().getSerializableExtra("usuario");
+
+        //Obtiene los valores de los Checkbox de la activity anterior
         if(getIntent().hasExtra("valorCaloria")){
             bCalorias = getIntent().getExtras().getBoolean("valorCaloria");
         }
@@ -88,6 +95,10 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
             bLactosa = getIntent().getExtras().getBoolean("valorLactosa");
         }
 
+        //Valida el cargo del empleado para poder usar el botón de agregar
+        if(!usuario.getCargoEmpleado().equalsIgnoreCase("administrador")){
+            agregar.setEnabled(false);
+        }
 
         if(bCalorias==true){
             cbCalorias.setChecked(true);
@@ -105,33 +116,19 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
     }
 
 
-
+    /**
+     * Métodos de los botones
+     * @param v Vista
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_agregar_mv:
+                //genera el Dialog de la comida
                 insertarComidaDialog();
-
                 break;
             case R.id.bt_filtrar_mv:
-                int i = lvListaComidas.getCount();
-                i = i+1;
                 filtrarCheckbox(lvListaComidas);
-                /*Intent intent = new Intent(MenuVista.this, MenuVista.class);
-                if(cbAzucar.isChecked()){
-                    bAzucar = true;
-                }
-                if(cbLactosa.isChecked()){
-                    bLactosa = true;
-                }
-                if(cbCalorias.isChecked()){
-                    bCalorias = true;
-                }
-                intent.putExtra("valorLactosa", bLactosa);
-                intent.putExtra("valorCaloria", bCalorias);
-                intent.putExtra("valorAzucar", bAzucar);
-                startActivity(intent);*/
-
                 break;
             default:
 
@@ -139,15 +136,18 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    //Genera el Dialog de insertar comida
     public void insertarComidaDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_agregar_comida, null);
         builder.setView(v);
+        //Enlace a los botones
         Button cancelar = (Button) v.findViewById(R.id.bt_cancelar_dialog_ac);
         Button confirmar = (Button) v.findViewById(R.id.bt_confirmar_dialog_ac);
         Button imagen = (Button) v.findViewById(R.id.bt_imagen_dialog_ac);
         imagen.setOnClickListener(this);
+        //Enlace de comoponentes visuales
         final EditText nombreDialog = (EditText) v.findViewById(R.id.et_nombre_dialog_ac);
         final EditText precioDialog = (EditText) v.findViewById(R.id.et_precio_dialog_ac);
         final EditText descripcionDialog = (EditText) v.findViewById(R.id.et_descrpcion_dialog_ac);
@@ -165,7 +165,7 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
                     }
                 }
         );
-
+        //Genera el dialogo para seleccionar la imagen
         imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +174,7 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
                 startActivityForResult(intent.createChooser(intent, "Selecciona app de imagen"), SELECT_PICTURE);
             }
         });
-
+        //Confirma la acción
         confirmar.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -185,7 +185,13 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
                         String ingredientes = ingredientesDialog.getText().toString();
                         String categoria = categoriaDialog.getSelectedItem().toString();
                         String restriccion = restriccionDialog.getSelectedItem().toString();
+                        //Validar que hayan datos
+                        if(nombre.equals("") | precio.equals("") | descripcion.equals("") | ingredientes.equals("") | categoria.equals("") | restriccion.equals("")){
+                            Toast.makeText(MenuVista.this,"Faltan datos por llenar",Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         DBController db = new DBController();
+                        //Genera la petición de agregar comida
                         db.agregarComida(nombre, precio, categoria, restriccion, descripcion, ingredientes, codigoImagen, MenuVista.this);
                         finish();
                         MenuVista.this.startActivity(MenuVista.this.getIntent());
@@ -196,6 +202,7 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
         dialogo.show();
     }
 
+    //Llena los Spinner
     public void llenarSpinners(String[] categorias, String[] restricciones, Spinner categoriasp, Spinner restriccionessp){
         ArrayAdapter<String> adapterCat = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, categorias);
@@ -212,6 +219,7 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
     }
 
 
+    //Método que se ejecuta después de seleccionar la imagen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -220,13 +228,14 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
                 case SELECT_PICTURE:
                     Uri path = data.getData();
                     try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path); //Se obtiene la imagen seleccionada
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                        byte[] byteArray = stream.toByteArray();
-                        codigoImagen = byteArray.toString();
-                        codigoImagen = Base64.encodeToString(byteArray, Base64.DEFAULT);
-                        Toast.makeText(this, "Imagen seleccionada", Toast.LENGTH_LONG);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream); //Se comprime la imagen
+                        byte[] byteArray = stream.toByteArray(); //Se pasa la imagen a codigo de bits
+                        codigoImagen = byteArray.toString(); //Se setea un string con los bits generados
+                        codigoImagen = Base64.encodeToString(byteArray, Base64.DEFAULT); //Se codifica la imagen en BASE64
+                        Toast.makeText(this, "Imagen seleccionada", Toast.LENGTH_LONG).show();
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -250,27 +259,28 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
                         JSonAdapter json = new JSonAdapter();
                         final ArrayList<Comida> comidaLista;
                         try {
+                            //Se hace un Arraylist del Json obtenido de la petición
                             comidaLista = json.comidaAdapter(respuesta);
                             ComidaAdapter adapter = new ComidaAdapter(MenuVista.this, comidaLista);
+                            //Se llena el listview con las comidas
                             lvListaComidas.setAdapter(adapter);
                             lvListaComidas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     Intent intent;
+                                    //Si la opciónn de editar está marcada se envia a la activity de detalle de la comida
                                     if(cbEditar.isChecked()){
                                         intent = new Intent(MenuVista.this, ComidaDetalle.class);
                                         intent.putExtra("comidaObject",comidaLista.get(position));
+                                        intent.putExtra("usuario", usuario);
                                         startActivity(intent);
                                     }
                                     else{
-                                        Comida comidaSel = comidaLista.get(position);
-                                        DBController db = new DBController();
-                                        db.agregarPedido(Integer.toString(comidaSel.getPrecioComida()),
-                                                "Proceso",
-                                                Integer.toString(comidaSel.getIdComida()),
-                                                Integer.toString(usuario.getCodEmpleado()),
-                                                "1",
-                                                MenuVista.this);
+                                        //Si no está marcado se selecciona la comida para generar la petición con el dialog
+                                        AlertDialog dialogo = createSingleListDialog();
+                                        dialogo.show();
+                                        Toast.makeText(MenuVista.this, "Pedido de comida realizado", Toast.LENGTH_LONG).show();
+                                        comidaSel = comidaLista.get(position);
                                     }
 
                                 }
@@ -289,43 +299,58 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
         VolleySingleton.getInstance(this).addToRequestQueue(peticion);
     }
 
+    //Filtra las comidas dependiendo de las opciones marcada
     public void filtrarCheckbox(ListView listaComidas){
-        final ArrayList<Comida> comidasFiltradas = new ArrayList<>();
+        final ArrayList<Comida> comidasFiltradascb = new ArrayList<>();
+        final ArrayList<Comida> comidasFiltradassp = new ArrayList<>();
         Comida comida = new Comida();
         for(int i = 0; i<listaComidas.getCount();i++){
             comida = (Comida) listaComidas.getItemAtPosition(i);
-            if(!(cbAzucar.isChecked() & cbLactosa.isChecked() & cbCalorias.isChecked())){
-                comidasFiltradas.add(comida);
+            //Si ningún checkbox está seleccionado no se filtra nada
+            if((cbAzucar.isChecked()==false) && (cbLactosa.isChecked()==false) && (cbCalorias.isChecked()==false)){
+                comidasFiltradascb.add(comida);
                 continue;
             }
+            //Si el filtro de lactosa está seleccionado se verifica la restricción
             if(cbLactosa.isChecked()){
                 if(!comida.getRestriccionComida().equalsIgnoreCase("Alto en lactosa")){
-                    comidasFiltradas.add(comida);
+                    comidasFiltradascb.add(comida);
                     continue;
                 }
             }
+            //Si el filtro de azucar está seleccionado se verifica la restricción
             if(cbAzucar.isChecked()){
                 if(!comida.getRestriccionComida().equalsIgnoreCase("Alto en azúcar")){
-                    comidasFiltradas.add(comida);
+                    comidasFiltradascb.add(comida);
                     continue;
                 }
             }
+            //Si el filtro de calorias está seleccionado se verifica la restricción
             if(cbCalorias.isChecked()){
                 if(!comida.getRestriccionComida().equalsIgnoreCase("Alto en calorias")){
-                    comidasFiltradas.add(comida);
+                    comidasFiltradascb.add(comida);
                     continue;
                 }
             }
         }
-        for(int i = 0;i<comidasFiltradas.size();i++){
-            comida = comidasFiltradas.get(i);
-            String filtro = spCategorias.getSelectedItem().toString();
-            if((!filtro.equalsIgnoreCase(comida.getCategoriaComida()))
-                    & !spCategorias.getSelectedItem().toString().equalsIgnoreCase(" ")){
-                comidasFiltradas.remove(i);
+        //Filtra las comidas según la categoría que tenga, si el spinner está vacia no filtra
+        if(spCategorias.getSelectedItem().toString().equalsIgnoreCase(" ")){
+            for(int i = 0; i<comidasFiltradascb.size();i++){
+                comida = comidasFiltradascb.get(i);
+                comidasFiltradassp.add(comida);
             }
         }
-        ComidaAdapter adapter = new ComidaAdapter(MenuVista.this, comidasFiltradas);
+        else{ //De lo contrario, verifica la categoria con la seleccionada en el spinner
+            for(int i = 0;i<comidasFiltradascb.size();i++){
+                comida = comidasFiltradascb.get(i);
+                String filtro = spCategorias.getSelectedItem().toString();
+                if(filtro.equalsIgnoreCase(comida.getCategoriaComida())){
+                    comidasFiltradassp.add(comida);
+                }
+
+            }
+        }
+        ComidaAdapter adapter = new ComidaAdapter(MenuVista.this, comidasFiltradassp);
         listaComidas.setAdapter(adapter);
         listaComidas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -333,18 +358,16 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
                 Intent intent;
                 if(cbEditar.isChecked()){
                     intent = new Intent(MenuVista.this, ComidaDetalle.class);
-                    intent.putExtra("comidaObject",comidasFiltradas.get(position));
+                    intent.putExtra("comidaObject",comidasFiltradassp.get(position));
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                 }
                 else{
-                    Comida comidaSel = comidasFiltradas.get(position);
-                    DBController db = new DBController();
-                    db.agregarPedido(Integer.toString(comidaSel.getPrecioComida()),
-                                     "Proceso",
-                                     Integer.toString(comidaSel.getIdComida()),
-                                     Integer.toString(usuario.getCodEmpleado()),
-                                     "1",
-                                     MenuVista.this);
+                    //Si no está marcado se selecciona la comida para generar la petición con el dialog
+                    AlertDialog dialogo = createSingleListDialog();
+                    dialogo.show();
+                    Toast.makeText(MenuVista.this, "Pedido de comida realizado", Toast.LENGTH_LONG).show();
+                    comidaSel = comidasFiltradassp.get(position);
                 }
 
             }
@@ -352,6 +375,46 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
 
 
 
+    }
+
+    public AlertDialog createSingleListDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MenuVista.this);
+
+        final CharSequence[] items = new CharSequence[10];
+
+        items[0] = "Mesas";
+        items[1] = "1";
+        items[2] = "2";
+        items[3] = "3";
+        items[4] = "4";
+        items[5] = "5";
+        items[6] = "6";
+        items[7] = "7";
+        items[8] = "8";
+        items[9] = "9";
+
+        builder.setTitle("Seleccionar mesa")
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(
+                                MenuVista.this,
+                                "Seleccionaste la mesa:" + items[which],
+                                Toast.LENGTH_SHORT)
+                                .show();
+                                nroMesaSel = items[which].toString();
+                                DBController db = new DBController();
+                                db.agregarPedido(Integer.toString(comidaSel.getPrecioComida()),
+                                "Proceso",
+                                Integer.toString(comidaSel.getIdComida()),
+                                Integer.toString(usuario.getCodEmpleado()),
+                                nroMesaSel,
+                                MenuVista.this);
+
+                    }
+                });
+
+        return builder.create();
     }
 
 
