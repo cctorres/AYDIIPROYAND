@@ -12,7 +12,7 @@ import com.example.computador.pruebabdonline.R;
 import java.util.ArrayList;
 
 /**
- * Created by Computador on 13/05/2017.
+ * Clase para adaptar el Objeto pedido a un Listview
  */
 
 public class PedidoAdapter extends BaseAdapter {

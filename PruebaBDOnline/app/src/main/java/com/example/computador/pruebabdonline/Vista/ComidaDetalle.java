@@ -46,7 +46,7 @@ import java.util.HashMap;
 
 public class ComidaDetalle extends AppCompatActivity implements View.OnClickListener{
 
-    private String[] categorias = new String[] {"Comida tipica", "Bebida", "Comida vegetariana", "Asado", "Comida de mar, Otros"};
+    private String[] categorias = new String[] {"Comida tipica", "Bebida", "Comida vegetariana", "Asado", "Comida de mar", "Otros"};
     private String[] restricciones = new String[] {"Alto en lactosa", "Alto en calorias", "Alto en azúcar", "Ninguna"};
     private final int SELECT_PICTURE = 300;
     private String codigoImagen = "";
@@ -63,8 +63,10 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
 
         //tomar la comida de la otra activity
         com = (Comida) getIntent().getSerializableExtra("comidaObject");
+        //Tomar el usuario de la otra activity
         usuario = (Empleado) getIntent().getSerializableExtra("usuario");
 
+        //Enlazar componentes visuales
         fotoComida = (ImageView) findViewById(R.id.iv_imagen_cd);
         nomComida = (TextView) findViewById(R.id.tv_nombre_cd);
         precioComida = (TextView) findViewById(R.id.tv_precio_cd);
@@ -75,23 +77,30 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
         eliminar = (Button) findViewById(R.id.bt_eliminar_cd);
         modificar = (Button) findViewById(R.id.bt_actualizar_cd);
 
+        //Proporcionarle los listener a los botones
         eliminar.setOnClickListener(this);
         modificar.setOnClickListener(this);
 
+        //Si el rol del usuario no es de administrador, deshabilita las opciones de eliminar o modificar las comidas
         if(!usuario.getCargoEmpleado().equalsIgnoreCase("administrador")){
             eliminar.setEnabled(false);
             modificar.setEnabled(false);
         }
     }
 
+    /**
+     * Métodos de los botones
+     * @param v Vista
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_eliminar_cd:
+                //Genera el dialog de eliminación de comida
                     eliminarComidaDialog();
-
                 break;
             case R.id.bt_actualizar_cd:
+                //genera el dialog para la actualización de datos de la comida
                 actualizarComidaDialog();
                 break;
             default:
@@ -102,6 +111,7 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
+        //Setea los datos de la comida a los componentes visuales
         nomComida.setText("Nombre: "+com.getNombreComida());
         precioComida.setText("Precio: $"+Integer.toString(com.getPrecioComida()));
         catComida.setText("Categoria: "+com.getCategoriaComida());
@@ -109,26 +119,30 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
         descComida.setText("Descripción: "+com.getDescripcionComida());
         ingreComida.setText("Ingredientes: "+com.getIngredientesComida());
         final String encodedString = com.getFotoComida();
+        //Decodifica el codigo de BIT64 para generar un BitMap que se seteará en el Imageview
         final String pureBase64Encoded = encodedString.substring(encodedString.indexOf(",")  + 1);
         final byte[] decodedBytes = Base64.decode(pureBase64Encoded, Base64.DEFAULT);
         Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
         fotoComida.setImageBitmap(decodedBitmap);
     }
 
+    //Dialog de confirmación de eliminación
     public void eliminarComidaDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle("Confirmar acción")
-                .setMessage("¿Está seguro de eliminar al empleado?")
+                .setMessage("¿Está seguro de eliminar el plato?")
                 .setPositiveButton("Sí",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 DBController db = new DBController();
-                                Intent intent = new Intent(ComidaDetalle.this, MenuVista.class);
+                                //Envía la petición al servidor para eliminar la comida
                                 db.eliminarComida(Integer.toString(com.getIdComida()), ComidaDetalle.this);
+                                Intent intent = new Intent(ComidaDetalle.this, MenuVista.class);
+                                intent.putExtra("usuaruio",usuario);
+                                ComidaDetalle.this.startActivity(intent);
                                 ComidaDetalle.this.finish();
-                                startActivity(intent);
                             }
                         })
                 .setNegativeButton("No",
@@ -143,7 +157,9 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
         dialogo.show();
     }
 
+    //Dialog de actualizar la comida
     public void actualizarComidaDialog() {
+        //Genera el Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_agregar_comida, null);
@@ -152,6 +168,7 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
         Button confirmar = (Button) v.findViewById(R.id.bt_confirmar_dialog_ac);
         Button imagen = (Button) v.findViewById(R.id.bt_imagen_dialog_ac);
         imagen.setOnClickListener(this);
+        //Setea los datos del Dialog con los de la comida
         final EditText nombreDialog = (EditText) v.findViewById(R.id.et_nombre_dialog_ac);
         final EditText precioDialog = (EditText) v.findViewById(R.id.et_precio_dialog_ac);
         final EditText descripcionDialog = (EditText) v.findViewById(R.id.et_descrpcion_dialog_ac);
@@ -164,7 +181,7 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
         descripcionDialog.setText(com.getDescripcionComida());
         ingredientesDialog.setText(com.getIngredientesComida());
         llenarSpinners(categorias,restricciones, categoriaDialog, restriccionDialog);
-
+        //Acción al cancelar la petición de actualización
         cancelar.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -174,7 +191,7 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
                     }
                 }
         );
-
+        //Acción que abre el seleccionador de imágenes
         imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,11 +200,12 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
                 startActivityForResult(intent.createChooser(intent, "Selecciona app de imagen"), SELECT_PICTURE);
             }
         });
-
+        //Acción de confirmación de la actualización
         confirmar.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Toma los datos digitados por el usuario
                         String nombre = nombreDialog.getText().toString();
                         String precio = precioDialog.getText().toString();
                         String descripcion = descripcionDialog.getText().toString();
@@ -198,15 +216,14 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
                         if(codigoImagen.equalsIgnoreCase("")){
                             codigoImagen = com.getFotoComida();
                         }
-                        PHPGetter php = new PHPGetter();
-                        actualizarComida act = new actualizarComida();
-                        act.execute(php.getActualizarComida(),"4",id,nombre,precio,categoria,restriccion,descripcion,ingredientes,codigoImagen);
-                        /*
                         DBController db = new DBController();
-                        db.actualizarComida(id,nombre,precio,categoria,restriccion,descripcion,ingredientes,codigoImagen,ComidaDetalle.this);
-                        */finish();
+                        //Hace la petición al servidor para actualizar los datos
+                        db.actualizarComida(id,nombre,precio,categoria,restriccion,descripcion,ingredientes,codigoImagen);
+                        finish();
+                        Intent intent = new Intent(ComidaDetalle.this, MenuVista.class);
+                        intent.putExtra("usuaruio",usuario);
+                        ComidaDetalle.this.startActivity(intent);
                         ComidaDetalle.this.finish();
-                        ComidaDetalle.this.startActivity(ComidaDetalle.this.getIntent());
                     }
                 }
         );
@@ -214,6 +231,7 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
         dialogo.show();
     }
 
+    //Llena los Spinner
     public void llenarSpinners(String[] categorias, String[] restricciones, Spinner categoriasp, Spinner restriccionessp){
         ArrayAdapter<String> adapterCat = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, categorias);
@@ -223,124 +241,19 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
         restriccionessp.setAdapter(adapterRest);
     }
 
-    public class actualizarComida extends AsyncTask<String,Void,String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String cadena = params[0];
-            URL url = null; // Url de donde queremos obtener información
-            String devuelve ="";
-
-            if(params[1].equalsIgnoreCase("4")){    // update
-
-                try {
-                    HttpURLConnection urlConn;
-
-                    DataOutputStream printout;
-                    DataInputStream input;
-                    url = new URL(cadena);
-                    urlConn = (HttpURLConnection) url.openConnection();
-                    urlConn.setDoInput(true);
-                    urlConn.setDoOutput(true);
-                    urlConn.setUseCaches(false);
-                    urlConn.setRequestProperty("Content-Type", "application/json");
-                    urlConn.setRequestProperty("Accept", "application/json");
-                    urlConn.connect();
-                    //Creo el Objeto JSON
-                    HashMap<String, String> jsonParam = new HashMap();
-
-                    jsonParam.put("id_comida",params[2]);
-                    jsonParam.put("nombre_comida", params[3]);
-                    jsonParam.put("precio_comida", params[4]);
-                    jsonParam.put("categoria_comida", params[5]);
-                    jsonParam.put("restriccion_comida", params[6]);
-                    jsonParam.put("descripcion_comida", params[7]);
-                    jsonParam.put("ingredientes_comida", params[8]);
-                    jsonParam.put("foto_comida", params[9]);
-                    JSONObject json = new JSONObject(jsonParam);
-                    // Envio los parámetros post.
-                    OutputStream os = urlConn.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(
-                            new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(json.toString());
-                    writer.flush();
-                    writer.close();
-
-                    int respuesta = urlConn.getResponseCode();
-
-
-                    StringBuilder result = new StringBuilder();
-
-                    if (respuesta == HttpURLConnection.HTTP_OK) {
-
-                        String line;
-                        BufferedReader br=new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-                        while ((line=br.readLine()) != null) {
-                            result.append(line);
-                            //response+=line;
-                        }
-
-                        //Creamos un objeto JSONObject para poder acceder a los atributos (campos) del objeto.
-                        JSONObject respuestaJSON = new JSONObject(result.toString());   //Creo un JSONObject a partir del StringBuilder pasado a cadena
-                        //Accedemos al vector de resultados
-
-                        String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
-
-                        if (resultJSON.equalsIgnoreCase("1")) {      // hay un alumno que mostrar
-                            devuelve = "Alumno actualizado correctamente";
-
-                        } else if (resultJSON.equalsIgnoreCase("2")) {
-                            devuelve = "El alumno no pudo actualizarse";
-                        }
-
-                    }
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                return devuelve;
-
-            }
-            return null;
-        }
-
-        @Override
-        protected void onCancelled(String s) {
-            super.onCancelled(s);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-    }
-
+    //Método que se ejecuta después de seleccionar la imagen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             switch (requestCode){
                 case SELECT_PICTURE:
-                    Uri path = data.getData();
+                    Uri path = data.getData();//Toma la imagen seleccionada
                     try {
+                        //Codifica la imagen en BITg4
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        //Comprime la imagen para que pese menos
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                         byte[] byteArray = stream.toByteArray();
                         codigoImagen = byteArray.toString();
@@ -353,4 +266,4 @@ public class ComidaDetalle extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-        }
+}

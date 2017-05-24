@@ -19,7 +19,7 @@ public final class VolleySingleton {
         requestQueue = getRequestQueue();
     }
 
-    //Se cerciora que solo halla una instancia del VolleySingleton
+    //Se cerciora que solo haya una instancia del VolleySingleton
     public static synchronized VolleySingleton getInstance(Context context) {
         if (singleton == null) {
             singleton = new VolleySingleton(context);
@@ -34,6 +34,7 @@ public final class VolleySingleton {
         return requestQueue;
     }
 
+    //Añade la petición al servidor a la cola
     public  void addToRequestQueue(Request req) {
         getRequestQueue().add(req);
     }

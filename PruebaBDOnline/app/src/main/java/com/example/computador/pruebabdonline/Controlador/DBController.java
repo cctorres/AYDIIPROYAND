@@ -238,39 +238,6 @@ public class DBController {
         VolleySingleton.getInstance(ctx).addToRequestQueue(jsArrayRequest);
     }
 
-    public void actualizarComida(String id,String nombre, String precio, String categoria, String restriccion, String descripcion,
-                              String ingredientes, String codigoImagen, Context ctx){
-        HashMap<String, String> parametros = new HashMap();
-        String url = php.getActualizarComida();
-
-        parametros.put("id_comida", id);
-        parametros.put("nombre_comida", nombre);
-        parametros.put("precio_comida", precio);
-        parametros.put("categoria_comida", categoria);
-        parametros.put("restriccion_comida", restriccion);
-        parametros.put("descripcion_comida", descripcion);
-        parametros.put("ingredientes_comida", ingredientes);
-        parametros.put("foto_comida", codigoImagen);
-        JsonObjectRequest jsArrayRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                new JSONObject(parametros),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Manejo de errores
-
-                    }
-                });
-        VolleySingleton.getInstance(ctx).addToRequestQueue(jsArrayRequest);
-    }
-
     /**
      * Genera una petición que eliminará una comida de la BD
      * @param id ID de la comida que se eliminará
@@ -352,4 +319,13 @@ public class DBController {
         //Envía la petición con le JSON generado
         VolleySingleton.getInstance(ctx).addToRequestQueue(jsArrayRequest);
     }
+
+    public void actualizarComida(String id, String nombre, String precio, String categoria, String restriccion,
+                                 String descripcion, String ingredientes, String codigoImagen){
+        PHPGetter php = new PHPGetter();
+        HTTPAsyncTask act = new HTTPAsyncTask();
+        act.execute(php.getActualizarComida(),"4",id,nombre,precio,categoria,restriccion,descripcion,ingredientes,codigoImagen);
+
+    }
+
 }

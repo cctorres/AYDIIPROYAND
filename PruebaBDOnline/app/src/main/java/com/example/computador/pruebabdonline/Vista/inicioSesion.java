@@ -116,6 +116,8 @@ public class inicioSesion extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_iniciarsesion_is:
+                    //Hace el proceso de búsqueda del empleado y su respectiva validación para dejarlo
+                    //Entrar al programa
                     setearListaEmpleados();
                     iniciarSesion();
                break;

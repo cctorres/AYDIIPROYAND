@@ -4,6 +4,9 @@ package com.example.computador.pruebabdonline.Modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Clase que representa el objeto Comida
+ */
 public class Comida implements Serializable{
 
     int idComida, precioComida;

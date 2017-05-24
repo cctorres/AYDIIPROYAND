@@ -6,6 +6,10 @@ import android.text.format.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Clase que representa el objeto Pedido
+ */
+
 public class Pedido {
 
     private int idPedido, precioPedido, codEmpleadoPedido, idMesaPedido;

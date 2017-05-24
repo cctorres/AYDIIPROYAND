@@ -12,6 +12,7 @@ import com.example.computador.pruebabdonline.R;
 
 import java.util.ArrayList;
 
+// Clase para adaptar el Objeto Empleado a un Listview
 
 public class EmpleadoAdapter extends BaseAdapter{
 

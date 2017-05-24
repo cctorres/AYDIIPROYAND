@@ -40,6 +40,7 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
     private TextView codEmp,idEmp,nomEmp,cargoEmp,telEmp, pedidoTotal, pedidoDiario;
     private ListView lvPedidos;
     private Button eliminar, modificar;
+    private Empleado usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_empleado_detalle);
         //tomar el empleado de la otra activity
         emp = (Empleado) getIntent().getSerializableExtra("empleadoObject");
+        usuario = (Empleado) getIntent().getSerializableExtra("usuario");
 
         //Ligar componentes visuales
         codEmp = (TextView) findViewById(R.id.tv_codigo_empdv);
@@ -72,13 +74,19 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
         telEmp.setText("Telefono: "+Integer.toString(emp.getTelefonoEmpleado()));
     }
 
+    /**
+     * Métodos de los botones
+     * @param v Vista
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_eliminar_empdv:
+                //Ejecuta el Dialog para la comfirmación de la eliminación
                 confirmaEliminacionEmpleado();
                 break;
             case R.id.bt_modificar_empdv:
+                //Ejecuta el Dialog para la actualización de los datos del empleado
                 actualizarEmpleadoDialog();
                 break;
             default:
@@ -92,6 +100,9 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
         llenarListViewPedidos();
     }
 
+    /**
+     * Genera un Dialog para confirma que se desea eliminar al empleado de la BD
+     */
     public void confirmaEliminacionEmpleado() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -103,7 +114,9 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
                             public void onClick(DialogInterface dialog, int which) {
                                 DBController db = new DBController();
                                 Intent intent = new Intent(EmpleadoDetalle.this, EmpleadosVista.class);
+                                intent.putExtra("usuario",usuario);
                                 EmpleadoDetalle.this.finish();
+                                //Envía la petición al servidor de elimnar al empleado de la BD
                                 db.eliminarEmpleado(emp.getCodEmpleado(), EmpleadoDetalle.this);
                                 startActivity(intent);
                             }
@@ -120,6 +133,9 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
         dialogo.show();
     }
 
+    /**
+     * Genera el Dialog para actualizar los datos del empleado
+     */
     public void actualizarEmpleadoDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -162,9 +178,13 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
         dialogo.show();
     }
 
+    /**
+     * Llena el Listvire de la vista con los pedidos que haya hecho el empleado
+     */
     public void llenarListViewPedidos(){ArrayList<Empleado> arrayEmp = new ArrayList<>();
         PHPGetter php = new PHPGetter();
         String url = php.getObtenerPedidos();
+        //Genera la petición al servidor sobre los pedidos
         StringRequest peticion = new StringRequest(
                 Request.Method.GET,
                 url,
@@ -174,13 +194,16 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
                         JSonAdapter json = new JSonAdapter();
                         final ArrayList<Pedido> pedidosLista;
                         try {
-                            pedidosLista = json.pedidoAdapter(respuesta);
+                            pedidosLista = json.pedidoAdapter(respuesta); //Del Json envíado por el servidor hace un Array con los pedidos
                             Pedido p = new Pedido();
+                            //Filta los pedidos por el Cod del empleado
                             ArrayList<Pedido> aux = p.filtrarPedidoEmpleado(pedidosLista, emp.getCodEmpleado());
                             adapter = new PedidoAdapter(EmpleadoDetalle.this, aux, emp.getCodEmpleado());
                             lvPedidos = (ListView) findViewById(R.id.lv_pedidos_empdv);
+                            //Genera un adapter para llenar el ListView de los pedidos
                             lvPedidos.setAdapter(adapter);
                             pedidoTotal.setText("Total de pedidos: "+ Integer.toString(aux.size()));
+                            //Filtra los pedidos por el empleado y el día actual
                             aux = p.filtrarPedidoEmpleadoYDia(pedidosLista, emp.getCodEmpleado());
                             pedidoDiario.setText("Total de pedidos hoy: "+aux.size());
                         } catch (JSONException e) {
@@ -196,6 +219,7 @@ public class EmpleadoDetalle extends AppCompatActivity implements View.OnClickLi
                     }
                 }
         );
+        //Envía la petición a la Cola del Volley
         VolleySingleton.getInstance(this).addToRequestQueue(peticion);
     }
 }

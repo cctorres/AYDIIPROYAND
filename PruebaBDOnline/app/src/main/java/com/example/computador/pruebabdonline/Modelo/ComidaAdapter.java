@@ -16,6 +16,7 @@ import com.example.computador.pruebabdonline.R;
 
 import java.util.ArrayList;
 
+// Clase para adaptar el Objeto Comida a un Listview
 
 public class ComidaAdapter extends BaseAdapter{
 

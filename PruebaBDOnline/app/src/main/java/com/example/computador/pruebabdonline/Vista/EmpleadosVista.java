@@ -46,6 +46,7 @@ public class EmpleadosVista extends AppCompatActivity implements View.OnClickLis
     private Spinner cargo;
     private Button agregar;
     private ListView lista;
+    private Empleado usuario;
     private String[] cargos = new String[] {"Administrador", "Cocinero", "Mesero", "Repartidor", "Supervisor"};
 
 
@@ -69,6 +70,9 @@ public class EmpleadosVista extends AppCompatActivity implements View.OnClickLis
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, cargos);
         cargo.setAdapter(adapter);
+
+        //Tomar el usuario de la activity anterior
+        usuario = (Empleado) getIntent().getSerializableExtra("usuario");
     }
 
     /**
@@ -155,8 +159,9 @@ public class EmpleadosVista extends AppCompatActivity implements View.OnClickLis
      * Reinicia la activity
      */
     public void refrescarActiviry(){
-        Intent intent = getIntent();
-        finish();
+        Intent intent =  new Intent(EmpleadosVista.this, EmpleadosVista.class);
+        intent.putExtra("usuario", usuario);
+        this.finish();
         startActivity(intent);
     }
 }

@@ -47,7 +47,7 @@ import java.util.ArrayList;
 
 public class MenuVista extends AppCompatActivity implements View.OnClickListener{
 
-    private String[] categorias = new String[] {"Comida tipica", "Bebida", "Comida vegetariana", "Asado", "Comida de mar", "Otros", " "};
+    private String[] categorias = new String[] {" ","Comida tipica", "Bebida", "Comida vegetariana", "Asado", "Comida de mar", "Otros"};
     private String[] restricciones = new String[] {"Alto en lactosa", "Alto en calorias", "Alto en azúcar", "Ninguna"};
     private ListView lvListaComidas;
     private Button agregar, filtrar;
@@ -377,6 +377,10 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
 
     }
 
+    /**
+     * Crea una ventana tipo Dialog para hacer el pedido de la comida
+     * @return Una ventana tipo Dialog
+     */
     public AlertDialog createSingleListDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MenuVista.this);
 
@@ -404,6 +408,7 @@ public class MenuVista extends AppCompatActivity implements View.OnClickListener
                                 .show();
                                 nroMesaSel = items[which].toString();
                                 DBController db = new DBController();
+                                //Envía la petición al servidor de agrergar un pedido
                                 db.agregarPedido(Integer.toString(comidaSel.getPrecioComida()),
                                 "Proceso",
                                 Integer.toString(comidaSel.getIdComida()),
